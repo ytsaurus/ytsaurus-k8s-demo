@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: jupyterlab
+  labels:
+    name: jupyterlab
+spec:
+  replicas: 1
+  serviceName: jupyter-headless
+  selector:
+    matchLabels:
+      name: jupyterlab
+  template:
+    metadata:
+      labels:
+        name: jupyterlab
+    spec:
+      containers:
+        - name: jupyterlab
+          image: "{{ images.jupyter }}"
+          env:
+            - name: JUPYTER_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: ytadminsec
+                  key: token
+            - name: YT_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: ytadminsec
+                  key: token
+            - name: YT_PROXY
+              value: http-proxies-lb.{{ namespace }}.svc.cluster.local
+            - name: CHYT_CTL_ADDRESS
+              value: chyt.{{ namespace }}.svc.cluster.local
+            - name: YT_UI_URL
+              value: https://yt-{{ namespace }}.demo.ytsaurus.tech/ytdemo
+            - name: DL_UI_URL
+              value: https://datalens-{{ namespace }}.demo.ytsaurus.tech
+          command:
+            - /bin/bash
+            - -c
+            - |
+              start.sh jupyter lab --ip='0.0.0.0' --port 8888 --notebook-dir=/home/jovyan/tutorial
+          resources:
+            requests:
+              cpu: 250m
+              memory: 2G
+      restartPolicy: Always
+      setHostnameAsFQDN: true
+

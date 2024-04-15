@@ -1,0 +1,9 @@
+apiVersion: cluster.ytsaurus.tech/v1
+kind: Chyt
+metadata:
+  name: mychyt
+spec:
+  image: "{{ str(images.chyt) }}"
+  makeDefault: true
+  ytsaurus:
+    name: ytdemo

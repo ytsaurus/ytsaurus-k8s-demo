@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  generation: 1
+  name: datalens-control-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: datalens-control-api
+  template:
+    metadata:
+      labels:
+        app: datalens-control-api
+    spec:
+      containers:
+      - env:
+        - name: BI_API_UWSGI_WORKERS_COUNT
+          value: "4"
+        - name: CONNECTOR_AVAILABILITY_VISIBLE
+          value: "clickhouse,postgres,chyt"
+        - name: RQE_FORCE_OFF
+          value: "1"
+        - name: DL_CRY_ACTUAL_KEY_ID
+          value: key_1
+        - name: DL_CRY_KEY_VAL_ID_key_1
+          value: "h1ZpilcYLYRdWp7Nk8X1M1kBPiUi8rdjz9oBfHyUKIk="
+        - name: RQE_SECRET_KEY
+          value: ""
+        - name: US_HOST
+          value: "http://datalens-us.{{namespace}}.svc.cluster.local"
+        - name: US_MASTER_TOKEN
+          value: "fake-us-master-token"
+        - name: CONFIG_PATH
+          value: "/etc/backend-configs/api.yaml"
+        image: cr.yandex/crpgg53svilvkn982otu/datalens-tech/datalens-control-api:0.2038.1
+        name: datalens-control-api
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /etc/backend-configs/api.yaml
+          name: config
+          subPath: api.yaml
+      volumes:
+      - configMap:
+          defaultMode: 420
+          name: control-api-config
+        name: config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: datalens-control-api
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8080
+      protocol: TCP
+      name: http
+  selector:
+    app: datalens-control-api

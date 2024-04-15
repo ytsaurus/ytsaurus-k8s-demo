@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  generation: 1
+  name: datalens-ui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: datalens-ui
+  template:
+    metadata:
+      labels:
+        app: datalens-ui
+    spec:
+      containers:
+      - env:
+        - name: APP_MODE
+          value: full
+        - name: APP_ENV
+          value: production
+        - name: APP_INSTALLATION
+          value: opensource
+        - name: AUTH_POLICY
+          value: disabled
+        - name: NODE_EXTRA_CA_CERTS
+          value: /usr/local/share/ca-certificates/cert.pem
+        - name: HC
+          value: "1"
+        - name: US_ENDPOINT
+          value: http://datalens-us.{{namespace}}.svc.cluster.local:80
+        - name: BI_API_ENDPOINT
+          value: http://datalens-control-api.{{namespace}}.svc.cluster.local:8080
+        - name: BI_DATA_ENDPOINT
+          value: http://datalens-data-api.{{namespace}}.svc.cluster.local:8080
+        image: cr.yandex/crpgg53svilvkn982otu/datalens-tech/datalens-ui:0.955.0
+        name: datalens-ui
+        ports:
+        - containerPort: 80
+          name: http
+          protocol: TCP
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: datalens-ui-lb
+spec:
+  type: NodePort
+  ports:
+    - port: 80
+      protocol: TCP
+      name: http
+  selector:
+    app: datalens-ui

@@ -1,0 +1,132 @@
+apiVersion: cluster.ytsaurus.tech/v1
+kind: Ytsaurus
+metadata:
+  name: ytdemo
+spec:
+  coreImage: "{{ str(images.core) }}"
+  uiImage: "{{ str(images.ui) }}"
+
+  adminCredentials:
+    name: ytadminsec
+
+  discovery:
+    instanceCount: 1
+
+  chyt:
+    resources:
+      limits:
+        memory: 100Mi
+
+  primaryMasters:
+    instanceCount: 1
+    cellTag: 1
+    locations:
+      - locationType: MasterChangelogs
+        path: /yt/master-data/master-changelogs
+      - locationType: MasterSnapshots
+        path: /yt/master-data/master-snapshots
+
+{% if persistent %}
+    volumeClaimTemplates:
+      - metadata:
+          name: master-data
+        spec:
+          accessModes: [ "ReadWriteOnce" ]
+          resources:
+            requests:
+              storage: 20Gi
+{% else %}
+    volumes:
+      - name: master-data
+        emptyDir:
+          sizeLimit: 20Gi
+{% endif %}
+
+    volumeMounts:
+      - name: master-data
+        mountPath: /yt/master-data
+
+  httpProxies:
+    - serviceType: NodePort
+      instanceCount: 1
+
+  rpcProxies:
+    - instanceCount: 1
+
+  dataNodes:
+    - instanceCount: 3
+
+      volumeMounts:
+        - name: node-data
+          mountPath: /yt/node-data
+
+{% if persistent %}
+      volumeClaimTemplates:
+        - metadata:
+            name: node-data
+          spec:
+            accessModes: [ "ReadWriteOnce" ]
+            resources:
+              requests:
+                storage: 150Gi
+{% else %}
+      volumes:
+        - name: node-data
+          emptyDir:
+            sizeLimit: 150Gi
+{% endif %}
+
+      locations:
+        - locationType: ChunkStore
+          path: /yt/node-data/chunk-store
+
+  execNodes:
+    - instanceCount: 3
+
+      resources:
+        limits:
+          cpu: 8
+          memory: 20Gi
+
+      volumeMounts:
+        - name: node-data
+          mountPath: /yt/node-data
+
+      volumes:
+        - name: node-data
+          emptyDir:
+            sizeLimit: 50Gi
+
+      locations:
+        - locationType: ChunkCache
+          path: /yt/node-data/chunk-cache
+        - locationType: Slots
+          path: /yt/node-data/slots
+
+  tabletNodes:
+    - instanceCount: 3
+
+  queryTrackers:
+    image: "{{ str(images.queryTracker) }}"
+    instanceCount: 1
+
+  yqlAgents:
+    image: "{{ str(images.queryTracker) }}"
+    instanceCount: 1
+
+  schedulers:
+    instanceCount: 1
+
+  controllerAgents:
+    instanceCount: 1
+
+  ui:
+    serviceType: NodePort
+    useMetrikaCounter: true
+    instanceCount: 1
+
+  strawberry:
+    image: "{{ str(images.strawberry) }}"
+
+  configOverrides:
+    name: demo-overrides

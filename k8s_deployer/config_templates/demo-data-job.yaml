@@ -1,0 +1,23 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: upload-demo-data
+spec:
+  template:
+    spec:
+      containers:
+        - name: upload-demo-data
+          image: "{{ str(images.demo_data) }}"
+          env:
+            - name: YT_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: ytadminsec
+                  key: token
+            - name: YT_PROXY
+              value: http-proxies-lb.{{ namespace }}.svc.cluster.local
+            - name: CLUSTER
+              value: ytdemo
+          command: ["bash", "-c", "set -e; pushd /data; setup_tutorial --cluster $CLUSTER; popd"]
+      restartPolicy: Never
+  backoffLimit: 100

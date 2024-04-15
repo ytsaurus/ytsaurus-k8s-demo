@@ -1,0 +1,23 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: custom-yt-init
+spec:
+  template:
+    spec:
+      containers:
+        - name: custom-yt-init
+          image: "{{ str(images.core) }}"
+          env:
+            - name: YT_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: ytadminsec
+                  key: token
+            - name: YT_PROXY
+              value: http-proxies-lb.{{ namespace }}.svc.cluster.local
+            - name: CLUSTER
+              value: ytdemo
+          command: ["bash", "-c", "set -e; yt link //sys/http_proxies //sys/proxies"]
+      restartPolicy: Never
+  backoffLimit: 100

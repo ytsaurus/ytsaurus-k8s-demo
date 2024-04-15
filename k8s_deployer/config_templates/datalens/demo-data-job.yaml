@@ -1,0 +1,27 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: setup-datalens-demo-data
+spec:
+  template:
+    spec:
+      containers:
+        - name: setup-datalens-demo-data
+          image: cr.yandex/crpgg53svilvkn982otu/custom/datalens-pg-dump:0.0.1
+          volumeMounts:
+            - mountPath: /entries-patch.sql
+              name: datalens-pg-dump-patch
+              subPath: entries-patch.sql
+            - mountPath: /revisions-patch.sql
+              name: datalens-pg-dump-patch
+              subPath: revisions-patch.sql
+          env:
+            - name: POSTGRES_DSN_LIST
+              value: postgres://us:us@pg-us-0.pg-us-headless.{{namespace}}.svc.cluster.local:5432/us-db-ci_purgeable
+          command: ["bash", "-c", "cat /workbooks.sql /entries.sql /entries-patch.sql /links.sql /revisions.sql /revisions-patch.sql | psql --single-transaction -v ON_ERROR_STOP=1 $POSTGRES_DSN_LIST"]
+      restartPolicy: Never
+      volumes:
+        - configMap:
+            name: datalens-pg-dump-patch
+          name: datalens-pg-dump-patch
+  backoffLimit: 100

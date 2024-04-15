@@ -1,0 +1,21 @@
+[flake8]
+select =
+    E, W,  # pep8 errors and warnings
+    F,  # pyflakes
+    C9, # McCabe
+    N8, # Naming Conventions
+    PL, # Flake8-Pylint
+    #B, S,  # bandit
+    #C,  # commas
+    #D,  # docstrings
+    #P,  # string-format
+    #Q,  # quotes
+ignore = 
+    # line break before binary operator
+    W503,
+    # line break after binary operator
+    W504,
+    # whitespace before ':'
+    E203
+max-line-length = 150
+max-complexity = 10

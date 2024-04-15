@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: datalens-us
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: datalens-us
+  template:
+    metadata:
+      labels:
+        app: datalens-us
+    spec:
+      containers:
+      - env:
+#        - name: USE_DEMO_DATA
+#          value: "1"
+        - name: APP_INSTALLATION
+          value: opensource
+        - name: APP_ENV
+          value: prod
+        - name: MASTER_TOKEN
+          value: fake-us-master-token
+        - name: POSTGRES_DSN_LIST
+          value: postgres://us:us@pg-us-0.pg-us-headless.{{namespace}}.svc.cluster.local:5432/us-db-ci_purgeable
+        - name: SKIP_INSTALL_DB_EXTENSIONS
+          value: "0"
+        - name: HC
+          value: "1"
+        image: cr.yandex/crpgg53svilvkn982otu/datalens-tech/datalens-us:0.116.0
+        name: datalens-us
+        ports:
+        - containerPort: 80
+          name: http
+          protocol: TCP

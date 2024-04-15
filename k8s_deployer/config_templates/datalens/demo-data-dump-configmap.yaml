@@ -1,0 +1,16 @@
+apiVersion: v1
+data:
+  entries-patch.sql: |
+    COPY public.entries (scope, type, key, inner_meta, created_by, created_at, updated_by, updated_at, is_deleted, deleted_at, hidden, display_key, entry_id, saved_id, published_id, tenant_id, name, sort_name, public, unversioned_data, workbook_id) FROM stdin;
+    connection	chyt	1569258308408181762/ytsaurus connection	\N	uid:systemId	2023-12-06 00:56:08.057565+00	uid:systemId	2023-12-06 00:56:08.057565+00	f	\N	f	1569258308408181762/YTsaurus connection	1569258308408181762	1569785149615244405	1569785149615244405	common	ytsaurus connection	\\x797473617572757320636f6e6e656374696f6e	f	{"token": {"key_id": "key_1", "key_kind": "local_fernet", "cypher_text": "{{ datalens_cypher_text }}"}}	1507164764046888724
+    \.
+  revisions-patch.sql: |
+    COPY public.revisions (data, meta, created_by, created_at, updated_by, updated_at, rev_id, entry_id, links) FROM stdin;
+    {"host": "http-proxies-lb.{{ namespace }}.svc.cluster.local", "name": null, "port": 80, "alias": "*ch_public", "secure": false, "table_name": null, "cache_ttl_sec": null, "raw_sql_level": "off", "sample_table_name": null, "max_execution_time": null, "data_export_forbidden": false}	{"state": "saved"}	uid:systemId	2023-12-06 00:56:08.057565+00	uid:systemId	2023-12-06 00:56:08.057565+00	1569258308408181761	1569258308408181762	{}
+    {"host": "http-proxies-lb.{{ namespace }}.svc.cluster.local", "name": null, "port": 80, "alias": "*ch_public", "secure": false, "table_name": null, "cache_ttl_sec": null, "raw_sql_level": "dashsql", "sample_table_name": null, "max_execution_time": null, "data_export_forbidden": false}	{"state": "saved"}	uid:systemId	2023-12-06 18:12:48.061551+00	uid:systemId	2023-12-06 18:12:48.061551+00	1569780079792227443	1569258308408181762	{}
+    {"host": "http-proxies-lb.{{ namespace }}.svc.cluster.local", "name": null, "port": 80, "alias": "*ch_public", "secure": false, "table_name": null, "cache_ttl_sec": 0, "raw_sql_level": "dashsql", "sample_table_name": null, "max_execution_time": null, "data_export_forbidden": false}	{"state": "saved"}	uid:systemId	2023-12-06 18:22:52.430796+00	uid:systemId	2023-12-06 18:22:52.430796+00	1569785149615244405	1569258308408181762	{}
+    \.
+
+kind: ConfigMap
+metadata:
+  name: datalens-pg-dump-patch

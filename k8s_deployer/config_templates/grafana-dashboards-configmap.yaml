@@ -1,0 +1,5810 @@
+apiVersion: v1
+kind: ConfigMap
+data:
+  scheduler-internal.json: |-
+    {
+      "annotations": {
+        "list": [
+          {
+            "builtIn": 1,
+            "datasource": {
+              "type": "grafana",
+              "uid": "-- Grafana --"
+            },
+            "enable": true,
+            "hide": true,
+            "iconColor": "rgba(0, 211, 255, 1)",
+            "name": "Annotations & Alerts",
+            "target": {
+              "limit": 100,
+              "matchAny": false,
+              "tags": [],
+              "type": "dashboard"
+            },
+            "type": "dashboard"
+          }
+        ]
+      },
+      "editable": true,
+      "fiscalYearStartMonth": 0,
+      "graphTooltip": 0,
+      "id": 1,
+      "links": [],
+      "liveNow": false,
+      "panels": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 12,
+            "x": 0,
+            "y": 0
+          },
+          "id": 1,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom"
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "expr": "{service=~\"yt-scheduler\", __name__=~\"yt_yt_alloc_total_bytes_used|yt_memory_generic_bytes_in_use_by_app\"}",
+              "refId": "A"
+            }
+          ],
+          "title": "Scheduler Memory",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 12,
+            "x": 12,
+            "y": 0
+          },
+          "id": 2,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom"
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "expr": "{service=~\"yt-controller-agent\", __name__=~\"yt_yt_alloc_total_bytes_used|yt_memory_generic_bytes_in_use_by_app\"}",
+              "refId": "A"
+            }
+          ],
+          "title": "Controller Agent Memory",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 12,
+            "x": 0,
+            "y": 6
+          },
+          "id": 3,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom"
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "expr": "{service=~\"yt-scheduler\", __name__=~\"yt_resource_tracker_user_cpu\", thread=~\"Control\"}",
+              "refId": "A"
+            }
+          ],
+          "title": "Scheduler Control CPU",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 12,
+            "x": 12,
+            "y": 6
+          },
+          "id": 4,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom"
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "expr": "{service=~\"yt-controller-agent\", __name__=~\"yt_resource_tracker_user_cpu\", thread=~\"Control\"}",
+              "refId": "A"
+            }
+          ],
+          "title": "Controller Agent Control CPU",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 12,
+            "x": 0,
+            "y": 12
+          },
+          "id": 5,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom"
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "expr": "{service=~\"yt-scheduler\", __name__=~\"yt_resource_tracker_user_cpu\", thread=~\"NodeShard\"}",
+              "refId": "A"
+            }
+          ],
+          "title": "Scheduler Node Shards CPU",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 12,
+            "x": 12,
+            "y": 12
+          },
+          "id": 6,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom"
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "expr": "{service=~\"yt-controller-agent\", __name__=~\"yt_resource_tracker_user_cpu\", thread=~\"Controller\"}",
+              "refId": "A"
+            }
+          ],
+          "title": "Controller Agent Controllers CPU",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 12,
+            "x": 0,
+            "y": 18
+          },
+          "id": 7,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom"
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "expr": "{service=~\"yt-scheduler\", __name__=~\"yt_resource_tracker_user_cpu\", thread=~\"RpcHeavy\"}",
+              "refId": "A"
+            }
+          ],
+          "title": "Scheduler RPC Heavy CPU",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 12,
+            "x": 12,
+            "y": 18
+          },
+          "id": 8,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom"
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "expr": "{service=~\"yt-controller-agent\", __name__=~\"yt_resource_tracker_user_cpu\", thread=~\"RpcHeavy\"}",
+              "refId": "A"
+            }
+          ],
+          "title": "Controller Agent RPC Heavy CPU",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 12,
+            "x": 0,
+            "y": 24
+          },
+          "id": 9,
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "expr": "{service=~\"yt-scheduler\", __name__=~\"yt_resource_tracker_user_cpu\", thread=~\"FSUpdatePool|OrchidWorker|Background\"}",
+              "refId": "A"
+            }
+          ],
+          "title": "Scheduler Thread Pools CPU",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 12,
+            "x": 12,
+            "y": 24
+          },
+          "id": 10,
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "expr": "rate({service=~\"yt-scheduler\", __name__=~\"yt_action_queue_time_cumulative\", bucket=~\".+\", thread=~\"Control\"}[$__rate_interval])",
+              "refId": "A"
+            }
+          ],
+          "title": "Control Thread Buckets",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "min": 0
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 12,
+            "x": 0,
+            "y": 30
+          },
+          "id": 11,
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "expr": "{service=~\"yt-scheduler\", __name__=~\"yt_scheduler_pools_running_operation_count|yt_scheduler_pools_total_operation_count\", pool=~\"<Root>\", tree=~\"default\"}",
+              "refId": "A"
+            }
+          ],
+          "title": "Operation Count",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "min": 0
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 12,
+            "x": 12,
+            "y": 30
+          },
+          "id": 12,
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "expr": "{service=~\"yt-scheduler\", __name__=~\"yt_scheduler_pools_schedulable_element_count\", pool=~\"<Root>\", tree=~\".+\"}",
+              "refId": "A"
+            }
+          ],
+          "title": "Schedulable Element Count",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "custom": {
+                "fillOpacity": 100,
+                "stacking": {
+                  "group": "A",
+                  "mode": "normal"
+                }
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 12,
+            "x": 0,
+            "y": 36
+          },
+          "id": 13,
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "expr": "rate({service=~\"yt-scheduler\", __name__=~\"yt_scheduler_schedule_job_attempt_count\", schedule_jobs_stage=~\"\", scheduling_stage=~\"\", tree=~\".+\"}[$__rate_interval])",
+              "refId": "A"
+            }
+          ],
+          "title": "Schedule job attempts",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "custom": {
+                "fillOpacity": 100,
+                "stacking": {
+                  "group": "A",
+                  "mode": "normal"
+                }
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 12,
+            "x": 12,
+            "y": 36
+          },
+          "id": 14,
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "expr": "rate({service=~\"yt-scheduler\", __name__=~\"yt_scheduler_preschedule_job_count\", schedule_jobs_stage=~\"\", scheduling_stage=~\"\", tree=~\".+\"}[$__rate_interval])",
+              "refId": "A"
+            }
+          ],
+          "title": "Preschedule job count rate",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "custom": {
+                "fillOpacity": 100,
+                "stacking": {
+                  "group": "A",
+                  "mode": "normal"
+                }
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 12,
+            "x": 0,
+            "y": 42
+          },
+          "id": 15,
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "expr": "rate({service=~\"yt-scheduler\", __name__=~\"yt_scheduler_preschedule_job_count\", scheduling_stage!~\"non_preemptive|^$\", tree=~\"default\"}[$__rate_interval])",
+              "refId": "A"
+            }
+          ],
+          "title": "Preemptive preschedule job attempts",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "custom": {
+                "fillOpacity": 100,
+                "stacking": {
+                  "group": "A",
+                  "mode": "normal"
+                }
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 12,
+            "x": 12,
+            "y": 42
+          },
+          "id": 16,
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "expr": "rate({service=~\"yt-scheduler\", __name__=~\"yt_scheduler_pools_metrics_total_time_aborted_rate|yt_scheduler_pools_metrics_total_time_completed\", pool=~\"<Root>\", tree=~\"default\"}[$__rate_interval])",
+              "refId": "A"
+            }
+          ],
+          "title": "Aborted vs completed job time",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "custom": {
+                "fillOpacity": 100,
+                "stacking": {
+                  "group": "A",
+                  "mode": "normal"
+                }
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 12,
+            "x": 0,
+            "y": 48
+          },
+          "id": 17,
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "expr": "rate({service=~\"yt-controller-agent\", __name__=~\"yt_controller_agent_jobs_aborted_job_count\", abort_reason!~\"preemption|^$\", job_type=~\"\", tree=~\"\"}[$__rate_interval])",
+              "refId": "A"
+            }
+          ],
+          "title": "Aborted jobs rate",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 12,
+            "x": 12,
+            "y": 48
+          },
+          "id": 18,
+          "options": {
+            "content": ""
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "refId": "A"
+            }
+          ],
+          "type": "text"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 12,
+            "x": 0,
+            "y": 54
+          },
+          "id": 19,
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "expr": "rate({service=~\"yt-scheduler\", __name__=~\"yt_logging_enqueued_events_rate|yt_logging_dropped_events\"}[$__rate_interval])",
+              "refId": "A"
+            }
+          ],
+          "title": "Scheduler Logging",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 12,
+            "x": 12,
+            "y": 54
+          },
+          "id": 20,
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "expr": "rate({service=~\"yt-controller-agent\", __name__=~\"yt_logging_enqueued_events\"}[$__rate_interval])",
+              "refId": "A"
+            }
+          ],
+          "title": "Controller Agent Logging",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "min": 0
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 12,
+            "x": 0,
+            "y": 60
+          },
+          "id": 21,
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "expr": "rate({service=~\"yt-scheduler\", __name__=~\"yt_rpc_server_request_count\", user=~\"\", yt_service=~\"JobTrackerService|AllocationTrackerService\", method=~\"Heartbeat\"}[$__rate_interval])",
+              "refId": "A"
+            }
+          ],
+          "title": "AllocationTrackerService.Heartbeat rate",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "min": 0
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 12,
+            "x": 12,
+            "y": 60
+          },
+          "id": 22,
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "expr": "{service=~\"yt-scheduler\", __name__=~\"yt_rpc_server_request_queue_size\", user=~\"\", yt_service=~\"JobTrackerService|AllocationTrackerService\", method=~\"Heartbeat\"}",
+              "refId": "A"
+            }
+          ],
+          "title": "AllocationTrackerService.Heartbeat queue size",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "min": 0
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 12,
+            "x": 0,
+            "y": 66
+          },
+          "id": 23,
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "expr": "{service=~\"yt-scheduler\", __name__=~\"yt_rpc_server_request_time_total_max\", user=~\"\", yt_service=~\"JobTrackerService|AllocationTrackerService\", method=~\"Heartbeat\"}",
+              "refId": "A"
+            }
+          ],
+          "title": "AllocationTrackerService.Heartbeat time",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "min": 0
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 12,
+            "x": 12,
+            "y": 66
+          },
+          "id": 24,
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "expr": "{service=~\"yt-scheduler\", __name__=~\"yt_rpc_server_concurrency.*\", user=~\"\", yt_service=~\"JobTrackerService|AllocationTrackerService\", method=~\"Heartbeat\"}",
+              "refId": "A"
+            }
+          ],
+          "title": "AllocationTrackerService.Heartbeat concurrency",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "min": 0
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 12,
+            "x": 0,
+            "y": 72
+          },
+          "id": 25,
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "expr": "rate({service=~\"yt-scheduler\", __name__=~\"yt_rpc_server_request_count\", user=~\"\", yt_service=~\"ControllerAgentTrackerService\", method=~\".*Heartbeat\"}[$__rate_interval])",
+              "refId": "A"
+            }
+          ],
+          "title": "ControllerAgentTrackerService.Heartbeat rate",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "min": 0
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 12,
+            "x": 12,
+            "y": 72
+          },
+          "id": 26,
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "expr": "{service=~\"yt-scheduler\", __name__=~\"yt_rpc_server_request_time_total_max\", user=~\"\", yt_service=~\"ControllerAgentTrackerService\", method=~\".*Heartbeat\"}",
+              "refId": "A"
+            }
+          ],
+          "title": "ControllerAgentTrackerService.Heartbeat time",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 12,
+            "x": 0,
+            "y": 78
+          },
+          "id": 27,
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "expr": "rate({service=~\"yt-controller-agent\", __name__=~\"yt_rpc_server_request_count\", user=~\"\", yt_service=~\"JobSpecService\", method=~\"GetJobSpecs\"}[$__rate_interval])",
+              "refId": "A"
+            }
+          ],
+          "title": "JobSpecService.GetJobSpecs rate",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 12,
+            "x": 12,
+            "y": 78
+          },
+          "id": 28,
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "expr": "{service=~\"yt-controller-agent\", __name__=~\"yt_rpc_server_request_queue_size\", user=~\"\", yt_service=~\"JobSpecService\", method=~\"GetJobSpecs\"}",
+              "refId": "A"
+            }
+          ],
+          "title": "JobSpecService.GetJobSpecs queue size",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 12,
+            "x": 0,
+            "y": 84
+          },
+          "id": 29,
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "expr": "{service=~\"yt-controller-agent\", __name__=~\"yt_rpc_server_request_time_total_max\", user=~\"\", yt_service=~\"JobSpecService\", method=~\"GetJobSpecs\"}",
+              "refId": "A"
+            }
+          ],
+          "title": "JobSpecService.GetJobSpecs time",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 12,
+            "x": 12,
+            "y": 84
+          },
+          "id": 30,
+          "options": {
+            "content": ""
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "refId": "A"
+            }
+          ],
+          "type": "text"
+        }
+      ],
+      "schemaVersion": 36,
+      "style": "dark",
+      "tags": [],
+      "templating": {
+        "list": []
+      },
+      "time": {
+        "from": "now-6h",
+        "to": "now"
+      },
+      "timepicker": {},
+      "timezone": "",
+      "title": "Scheduler Internal",
+      "uid": "YT-scheduler-internal",
+      "version": 7,
+      "weekStart": ""
+    }
+  scheduler-pool.json: |-
+    {
+      "annotations": {
+        "list": [
+          {
+            "builtIn": 1,
+            "datasource": {
+              "type": "grafana",
+              "uid": "-- Grafana --"
+            },
+            "enable": true,
+            "hide": true,
+            "iconColor": "rgba(0, 211, 255, 1)",
+            "name": "Annotations & Alerts",
+            "target": {
+              "limit": 100,
+              "matchAny": false,
+              "tags": [],
+              "type": "dashboard"
+            },
+            "type": "dashboard"
+          }
+        ]
+      },
+      "editable": true,
+      "fiscalYearStartMonth": 0,
+      "graphTooltip": 0,
+      "id": 3,
+      "links": [],
+      "liveNow": false,
+      "panels": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 8,
+            "x": 0,
+            "y": 0
+          },
+          "id": 1,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom"
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "expr": "{service=~\"yt-scheduler\", __name__=~\"yt_scheduler_pools_resource_usage_cpu\", pool=~\"$pool\", tree=~\"$tree\"}",
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "expr": "{service=~\"yt-scheduler\", __name__=~\"yt_scheduler_pools_resource_demand_cpu\", pool=~\"$pool\", tree=~\"$tree\"}",
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "expr": "{service=~\"yt-scheduler\", __name__=~\"yt_scheduler_pools_effective_strong_guarantee_resources_cpu\", pool=~\"$pool\", tree=~\"$tree\"}",
+              "refId": "C"
+            }
+          ],
+          "title": "CPU",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 8,
+            "x": 8,
+            "y": 0
+          },
+          "id": 2,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom"
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "expr": "{service=~\"yt-scheduler\", __name__=~\"yt_scheduler_pools_resource_usage_user_memory\", pool=~\"$pool\", tree=~\"$tree\"}",
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "expr": "{service=~\"yt-scheduler\", __name__=~\"yt_scheduler_pools_resource_demand_user_memory\", pool=~\"$pool\", tree=~\"$tree\"}",
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "expr": "{service=~\"yt-scheduler\", __name__=~\"yt_scheduler_pools_effective_strong_guarantee_resources_user_memory\", pool=~\"$pool\", tree=~\"$tree\"}",
+              "refId": "C"
+            }
+          ],
+          "title": "RAM",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 8,
+            "x": 16,
+            "y": 0
+          },
+          "id": 3,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom"
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "expr": "{service=~\"yt-scheduler\", __name__=~\"yt_scheduler_pools_resource_usage_gpu\", pool=~\"$pool\", tree=~\"$tree\"}",
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "expr": "{service=~\"yt-scheduler\", __name__=~\"yt_scheduler_pools_resource_demand_gpu\", pool=~\"$pool\", tree=~\"$tree\"}",
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "expr": "{service=~\"yt-scheduler\", __name__=~\"yt_scheduler_pools_effective_strong_guarantee_resources_gpu\", pool=~\"$pool\", tree=~\"$tree\"}",
+              "refId": "C"
+            }
+          ],
+          "title": "GPU",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 12,
+            "x": 0,
+            "y": 6
+          },
+          "id": 4,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom"
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "expr": "{service=~\"yt-scheduler\", __name__=~\"yt_scheduler_pools_running_operation_count\", pool=~\"$pool\", tree=~\"$tree\"}",
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "expr": "{service=~\"yt-scheduler\", __name__=~\"yt_scheduler_pools_max_running_operation_count\", pool=~\"$pool\", tree=~\"$tree\"}",
+              "refId": "B"
+            }
+          ],
+          "title": "Running operation count",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 12,
+            "x": 12,
+            "y": 6
+          },
+          "id": 5,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom"
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "expr": "{service=~\"yt-scheduler\", __name__=~\"yt_scheduler_pools_total_operation_count\", pool=~\"$pool\", tree=~\"$tree\"}",
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "expr": "{service=~\"yt-scheduler\", __name__=~\"yt_scheduler_pools_max_operation_count\", pool=~\"$pool\", tree=~\"$tree\"}",
+              "refId": "B"
+            }
+          ],
+          "title": "Total operation count",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 24,
+            "x": 0,
+            "y": 12
+          },
+          "id": 6,
+          "options": {
+            "content": "\n- **Demand**: amount of resources needed to run all waiting and running jobs in the pool.\n- **Usage**: model resource consumption of the pool from scheduler's point of view. Represents the number of resources that are reserved for operations in the pool. Actual resource consumption may differ.\n- **Strong guarantee**: amount of resources that is guaranteed for operations in the pool at any moment.\n- **Total operation count**: total number of operations in the pool, includes \"Running operation count\". The difference between \"Total operation count\" and \"Running operation count\" is the size of the queue of operations that are waiting to be started.\n",
+            "mode": "markdown"
+          },
+          "pluginVersion": "9.0.6",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "refId": "A"
+            }
+          ],
+          "type": "text"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 8,
+            "x": 0,
+            "y": 18
+          },
+          "id": 7,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom"
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "expr": "{service=~\"yt-scheduler\", __name__=~\"yt_scheduler_pools_dominant_usage_share\", pool=~\"$pool\", tree=~\"$tree\"}",
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "expr": "{service=~\"yt-scheduler\", __name__=~\"yt_scheduler_pools_dominant_demand_share\", pool=~\"$pool\", tree=~\"$tree\"}",
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "expr": "{service=~\"yt-scheduler\", __name__=~\"yt_scheduler_pools_dominant_fair_share_total\", pool=~\"$pool\", tree=~\"$tree\"}",
+              "refId": "C"
+            }
+          ],
+          "title": "Resource shares: usage, demand, fair share",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 8,
+            "x": 8,
+            "y": 18
+          },
+          "id": 8,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom"
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "expr": "{service=~\"yt-scheduler\", __name__=~\"yt_scheduler_pools_fair_share_total_cpu\", pool=~\"$pool\", tree=~\"$tree\"}",
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "expr": "{service=~\"yt-scheduler\", __name__=~\"yt_scheduler_pools_fair_share_total_memory\", pool=~\"$pool\", tree=~\"$tree\"}",
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "expr": "{service=~\"yt-scheduler\", __name__=~\"yt_scheduler_pools_fair_share_total_gpu\", pool=~\"$pool\", tree=~\"$tree\"}",
+              "refId": "C"
+            }
+          ],
+          "title": "Fair share: CPU, RAM, GPU components",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 100,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "normal"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 8,
+            "x": 16,
+            "y": 18
+          },
+          "id": 9,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom"
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "expr": "{service=~\"yt-scheduler\", __name__=~\"yt_scheduler_pools_dominant_fair_share_integral_guarantee\", pool=~\"$pool\", tree=~\"$tree\"}",
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "expr": "{service=~\"yt-scheduler\", __name__=~\"yt_scheduler_pools_dominant_fair_share_strong_guarantee\", pool=~\"$pool\", tree=~\"$tree\"}",
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "expr": "{service=~\"yt-scheduler\", __name__=~\"yt_scheduler_pools_dominant_fair_share_weight_proportional\", pool=~\"$pool\", tree=~\"$tree\"}",
+              "refId": "C"
+            }
+          ],
+          "title": "Dominant fair share: strong, integral, weight proportional",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 24,
+            "x": 0,
+            "y": 24
+          },
+          "id": 10,
+          "options": {
+            "content": "\n- **Usage**, **Demand**, **Fair share**: share of the cluster that is used, demanded or should be given to the pool. For example, 1.0 or 100% corresponds to the total amount of resources in the cluster.\n- **CPU. RAM, GPU fair share components**  help to determine pool's dominant resource.\n\nIn addition, fair share can be split into three parts: strong guarantee, integral guarantee and free resources, which are distributed between pools in proportion to their weights.\n",
+            "mode": "markdown"
+          },
+          "pluginVersion": "9.0.6",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "refId": "A"
+            }
+          ],
+          "type": "text"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 8,
+            "x": 0,
+            "y": 30
+          },
+          "id": 11,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom"
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "expr": "rate({service=~\"yt-scheduler\", __name__=~\"yt_scheduler_pools_metrics_user_job_io_total\", pool=~\"$pool\", tree=~\"$tree\"}[$__rate_interval])",
+              "refId": "A"
+            }
+          ],
+          "title": "Job metrics: local disk IO",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 100,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "normal"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 8,
+            "x": 8,
+            "y": 30
+          },
+          "id": 12,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom"
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "expr": "rate({service=~\"yt-scheduler\", __name__=~\"yt_scheduler_pools_metrics_user_job_cpu_system\", pool=~\"$pool\", tree=~\"$tree\"}[$__rate_interval])",
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "expr": "rate({service=~\"yt-scheduler\", __name__=~\"yt_scheduler_pools_metrics_user_job_cpu_user\", pool=~\"$pool\", tree=~\"$tree\"}[$__rate_interval])",
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "expr": "rate({service=~\"yt-scheduler\", __name__=~\"yt_scheduler_pools_metrics_job_proxy_cpu_system\", pool=~\"$pool\", tree=~\"$tree\"}[$__rate_interval])",
+              "refId": "C"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "expr": "rate({service=~\"yt-scheduler\", __name__=~\"yt_scheduler_pools_metrics_job_proxy_cpu_user\", pool=~\"$pool\", tree=~\"$tree\"}[$__rate_interval])",
+              "refId": "D"
+            }
+          ],
+          "title": "Job metrics: CPU usage",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 8,
+            "x": 16,
+            "y": 30
+          },
+          "id": 13,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom"
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "expr": "rate({service=~\"yt-scheduler\", __name__=~\"yt_scheduler_pools_metrics_gpu_load\", pool=~\"$pool\", tree=~\"$tree\"}[$__rate_interval])",
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "expr": "rate({service=~\"yt-scheduler\", __name__=~\"yt_scheduler_pools_metrics_gpu_utilization_gpu\", pool=~\"$pool\", tree=~\"$tree\"}[$__rate_interval])",
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "expr": "{service=~\"yt-scheduler\", __name__=~\"yt_scheduler_pools_resource_usage_gpu\", pool=~\"$pool\", tree=~\"$tree\"}",
+              "refId": "C"
+            }
+          ],
+          "title": "Job metrics: GPU usage",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 24,
+            "x": 0,
+            "y": 36
+          },
+          "id": 14,
+          "options": {
+            "content": "\n- **Local disk I/O**: total amount of input/output operations per second (IOPS) of all user jobs in the pool.\n- **CPU usage**: total detailed CPU usage statistics of all user jobs and their job proxies in the pool.\n- **GPU usage**: total detailed GPU utilization statistics of all user jobs in the pool.\n",
+            "mode": "markdown"
+          },
+          "pluginVersion": "9.0.6",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "refId": "A"
+            }
+          ],
+          "type": "text"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 8,
+            "x": 0,
+            "y": 42
+          },
+          "id": 15,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom"
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "expr": "{service=~\"yt-scheduler\", __name__=~\"yt_scheduler_pools_accumulated_resource_volume_cpu\", pool=~\"$pool\", tree=~\"$tree\"}",
+              "refId": "A"
+            }
+          ],
+          "title": "Accumulated resource volume: CPU",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 8,
+            "x": 8,
+            "y": 42
+          },
+          "id": 16,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom"
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "expr": "{service=~\"yt-scheduler\", __name__=~\"yt_scheduler_pools_accumulated_resource_volume_user_memory\", pool=~\"$pool\", tree=~\"$tree\"}",
+              "refId": "A"
+            }
+          ],
+          "title": "Accumulated resource volume: RAM",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 8,
+            "x": 16,
+            "y": 42
+          },
+          "id": 17,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom"
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "expr": "{service=~\"yt-scheduler\", __name__=~\"yt_scheduler_pools_accumulated_volume_dominant_share\", pool=~\"$pool\", tree=~\"$tree\"}",
+              "refId": "A"
+            }
+          ],
+          "title": "Accumulated resource volume share",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 8,
+            "x": 0,
+            "y": 48
+          },
+          "id": 18,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom"
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "expr": "{service=~\"yt-scheduler\", __name__=~\"yt_scheduler_pools_accepted_free_volume_cpu\", pool=~\"$pool\", tree=~\"$tree\"}",
+              "refId": "A"
+            }
+          ],
+          "title": "Accepted free volume: CPU",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 8,
+            "x": 8,
+            "y": 48
+          },
+          "id": 19,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom"
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "expr": "{service=~\"yt-scheduler\", __name__=~\"yt_scheduler_pools_accepted_free_volume_user_memory\", pool=~\"$pool\", tree=~\"$tree\"}",
+              "refId": "A"
+            }
+          ],
+          "title": "Accepted free volume: RAM",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 8,
+            "x": 16,
+            "y": 48
+          },
+          "id": 20,
+          "options": {
+            "content": "",
+            "mode": "markdown"
+          },
+          "pluginVersion": "9.0.6",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "refId": "A"
+            }
+          ],
+          "type": "text"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 24,
+            "x": 0,
+            "y": 54
+          },
+          "id": 21,
+          "options": {
+            "content": "\nThe following metrics are only relevant for pools with burst or relaxed integral guarantees.\n\n- **Accumulated resource volume share**: amount of virtual resources accumulated in the pool which can be spent on integral guarantees. In `cluster_share*sec`.\n- **Accumulated resource volume (CPU/RAM)**: approximate amount of accumulated resources computed based on accumulated volume share and the current total resource amount in the cluster. In `cpu*sec`/`bytes*sec`.\n- **Accepted free volume (CPU/RAM)**: virtual resource volume which was obtained by the pool via redistribution of other pools' unused integral resource flows.\n",
+            "mode": "markdown"
+          },
+          "pluginVersion": "9.0.6",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "refId": "A"
+            }
+          ],
+          "type": "text"
+        }
+      ],
+      "schemaVersion": 36,
+      "style": "dark",
+      "tags": [],
+      "templating": {
+        "list": [
+          {
+            "allFormat": "glob",
+            "current": {
+              "selected": false,
+              "text": "default",
+              "value": "default"
+            },
+            "hide": 0,
+            "name": "tree",
+            "options": [
+              {
+                "selected": true,
+                "text": "default",
+                "value": "default"
+              }
+            ],
+            "query": "default",
+            "skipUrlSync": false,
+            "type": "textbox"
+          },
+          {
+            "allFormat": "glob",
+            "current": {
+              "selected": false,
+              "text": "<Root>",
+              "value": "<Root>"
+            },
+            "hide": 0,
+            "name": "pool",
+            "options": [
+              {
+                "selected": true,
+                "text": "123",
+                "value": "123"
+              }
+            ],
+            "query": "<Root>",
+            "skipUrlSync": false,
+            "type": "textbox"
+          }
+        ]
+      },
+      "time": {
+        "from": "now-6h",
+        "to": "now"
+      },
+      "timepicker": {},
+      "timezone": "",
+      "title": "Scheduler Pool",
+      "uid": "YT-Scheduler-pool",
+      "version": 4,
+      "weekStart": ""
+    }
+  pool-dashboard-for-UI.json: |-
+    {
+      "annotations": {
+        "list": [
+          {
+            "builtIn": 1,
+            "datasource": {
+              "type": "grafana",
+              "uid": "-- Grafana --"
+            },
+            "enable": true,
+            "hide": true,
+            "iconColor": "rgba(0, 211, 255, 1)",
+            "name": "Annotations & Alerts",
+            "type": "dashboard"
+          }
+        ]
+      },
+      "editable": true,
+      "fiscalYearStartMonth": 0,
+      "graphTooltip": 0,
+      "links": [],
+      "liveNow": false,
+      "panels": [
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "grafana"
+          },
+          "gridPos": {
+            "h": 2,
+            "w": 24,
+            "x": 0,
+            "y": 0
+          },
+          "id": 8,
+          "options": {
+            "code": {
+              "language": "plaintext",
+              "showLineNumbers": false,
+              "showMiniMap": false
+            },
+            "content": "# Usage, demand and strong guarantee",
+            "mode": "markdown"
+          },
+          "pluginVersion": "9.5.3",
+          "transparent": true,
+          "type": "text"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "CPU, cores",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  }
+                ]
+              },
+              "unit": "none"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 8,
+            "x": 0,
+            "y": 2
+          },
+          "id": 24,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "editorMode": "builder",
+              "exemplar": false,
+              "expr": "{__name__=\"yt_scheduler_pools_resource_usage_cpu\", tree=\"$pool_tree\", pool=\"$pool\"}",
+              "instant": false,
+              "legendFormat": "usage",
+              "range": true,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "editorMode": "builder",
+              "exemplar": false,
+              "expr": "{__name__=\"yt_scheduler_pools_resource_demand_cpu\", tree=\"$pool_tree\", pool=\"$pool\"}",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "demand",
+              "range": true,
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "editorMode": "builder",
+              "exemplar": false,
+              "expr": "{__name__=\"yt_scheduler_pools_strong_guarantee_resources_cpu\", tree=\"$pool_tree\", pool=\"$pool\"}",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "strong_guarantee",
+              "range": true,
+              "refId": "C"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "editorMode": "builder",
+              "exemplar": false,
+              "expr": "{__name__=\"yt_scheduler_pools_specified_resource_limits_cpu\", tree=\"$pool_tree\", pool=\"$pool\"}",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "specified_limit",
+              "range": true,
+              "refId": "D"
+            }
+          ],
+          "title": "CPU: usage, demand, guarantee",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "Memory",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  }
+                ]
+              },
+              "unit": "none"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 8,
+            "x": 8,
+            "y": 2
+          },
+          "id": 26,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "{__name__=\"yt_scheduler_pools_resource_usage_user_memory\", tree=\"$pool_tree\", pool=\"$pool\"}",
+              "instant": false,
+              "legendFormat": "usage",
+              "range": true,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "{__name__=\"yt_scheduler_pools_resource_demand_user_memory\", tree=\"$pool_tree\", pool=\"$pool\"}",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "demand",
+              "range": true,
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "{__name__=\"yt_scheduler_pools_strong_guarantee_resources_user_memory\", tree=\"$pool_tree\", pool=\"$pool\"}",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "strong_guarantee",
+              "range": true,
+              "refId": "C"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "{__name__=\"yt_scheduler_pools_specified_resource_limits_user_memory\", tree=\"$pool_tree\", pool=\"$pool\"}",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "specified_limit",
+              "range": true,
+              "refId": "D"
+            }
+          ],
+          "title": "RAM: usage, demand, guarantee",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "GPU, cards",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  }
+                ]
+              },
+              "unit": "none"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 8,
+            "x": 16,
+            "y": 2
+          },
+          "id": 28,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "{__name__=\"yt_scheduler_pools_resource_usage_gpu\", tree=\"$pool_tree\", pool=\"$pool\"}",
+              "instant": false,
+              "legendFormat": "usage",
+              "range": true,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "{__name__=\"yt_scheduler_pools_resource_demand_gpu\", tree=\"$pool_tree\", pool=\"$pool\"}",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "demand",
+              "range": true,
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "{__name__=\"yt_scheduler_pools_strong_guarantee_resources_gpu\", tree=\"$pool_tree\", pool=\"$pool\"}",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "strong_guarantee",
+              "range": true,
+              "refId": "C"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "{__name__=\"yt_scheduler_pools_specified_resource_limits_gpu\", tree=\"$pool_tree\", pool=\"$pool\"}",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "specified_limit",
+              "range": true,
+              "refId": "D"
+            }
+          ],
+          "title": "GPU: usage, demand, guarantee",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "Operation count",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  }
+                ]
+              },
+              "unit": "none"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 10
+          },
+          "id": 25,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "editorMode": "builder",
+              "exemplar": false,
+              "expr": "{__name__=\"yt_scheduler_pools_running_operation_count\", tree=\"$pool_tree\", pool=\"$pool\"}",
+              "instant": false,
+              "legendFormat": "usage",
+              "range": true,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "editorMode": "builder",
+              "exemplar": false,
+              "expr": "{__name__=\"yt_scheduler_pools_max_running_operation_count\", tree=\"$pool_tree\", pool=\"$pool\"}",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "limit",
+              "range": true,
+              "refId": "B"
+            }
+          ],
+          "title": "Running operation count",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "Operation count",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  }
+                ]
+              },
+              "unit": "none"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 10
+          },
+          "id": 27,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "editorMode": "builder",
+              "exemplar": false,
+              "expr": "{__name__=\"yt_scheduler_pools_total_operation_count\", tree=\"$pool_tree\", pool=\"$pool\"}",
+              "instant": false,
+              "legendFormat": "usage",
+              "range": true,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "editorMode": "builder",
+              "exemplar": false,
+              "expr": "{__name__=\"yt_scheduler_pools_max_operation_count\", tree=\"$pool_tree\", pool=\"$pool\"}",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "limit",
+              "range": true,
+              "refId": "B"
+            }
+          ],
+          "title": "Total operation count",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "grafana"
+          },
+          "gridPos": {
+            "h": 5,
+            "w": 24,
+            "x": 0,
+            "y": 18
+          },
+          "id": 29,
+          "options": {
+            "code": {
+              "language": "plaintext",
+              "showLineNumbers": false,
+              "showMiniMap": false
+            },
+            "content": "<p>\n<br><b>Demand</b>: amount of resources needed to run all waiting and running jobs in the pool.\n<br><b>Usage</b>: model resource consumption of the pool from scheduler's point of view. Represents the number of resources that are reserved for operations in the pool. Actual resource consumption may differ.\n<br><b>Strong guarantee</b>: amount of resources that is guaranteed for operations in the pool at any moment.\n<br><b>Total operation count</b>: total number of operations in the pool, includes \"Running operation count\". The difference between \"Total operation count\" and \"Running operation count\" is the size of the queue of operations that are waiting to be started.\n</p>",
+            "mode": "html"
+          },
+          "pluginVersion": "9.5.3",
+          "type": "text"
+        },
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "grafana"
+          },
+          "gridPos": {
+            "h": 2,
+            "w": 24,
+            "x": 0,
+            "y": 23
+          },
+          "id": 23,
+          "options": {
+            "code": {
+              "language": "plaintext",
+              "showLineNumbers": false,
+              "showMiniMap": false
+            },
+            "content": "# Cluster share",
+            "mode": "markdown"
+          },
+          "pluginVersion": "9.5.3",
+          "transparent": true,
+          "type": "text"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  }
+                ]
+              },
+              "unit": "none"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 8,
+            "x": 0,
+            "y": 25
+          },
+          "id": 14,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "editorMode": "builder",
+              "exemplar": false,
+              "expr": "{__name__=\"yt_scheduler_pools_dominant_usage_share\", tree=\"$pool_tree\", pool=\"$pool\"}",
+              "instant": false,
+              "legendFormat": "dominant resource usage share",
+              "range": true,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "editorMode": "builder",
+              "exemplar": false,
+              "expr": "{__name__=\"yt_scheduler_pools_dominant_demand_share\", tree=\"$pool_tree\", pool=\"$pool\"}",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "dominant resource demand share",
+              "range": true,
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "editorMode": "builder",
+              "exemplar": false,
+              "expr": "{__name__=\"yt_scheduler_pools_dominant_fair_share_total\", tree=\"$pool_tree\", pool=\"$pool\"}",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "dominant resource fair share",
+              "range": true,
+              "refId": "C"
+            }
+          ],
+          "title": "Resource shares: usage, demand, fair share",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  }
+                ]
+              },
+              "unit": "none"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 8,
+            "x": 8,
+            "y": 25
+          },
+          "id": 20,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "editorMode": "builder",
+              "exemplar": false,
+              "expr": "{__name__=\"yt_scheduler_pools_fair_share_total_cpu\", tree=\"$pool_tree\", pool=\"$pool\"}",
+              "instant": false,
+              "legendFormat": "cpu fair share",
+              "range": true,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "editorMode": "builder",
+              "exemplar": false,
+              "expr": "{__name__=\"yt_scheduler_pools_fair_share_total_memory\", tree=\"$pool_tree\", pool=\"$pool\"}",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "memory fair share",
+              "range": true,
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "editorMode": "builder",
+              "exemplar": false,
+              "expr": "{__name__=\"yt_scheduler_pools_fair_share_total_gpu\", tree=\"$pool_tree\", pool=\"$pool\"}",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "gpu fair share",
+              "range": true,
+              "refId": "C"
+            }
+          ],
+          "title": "Fair share: CPU, RAM, GPU components",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 30,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "normal"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  }
+                ]
+              },
+              "unit": "none"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 8,
+            "x": 16,
+            "y": 25
+          },
+          "id": 16,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "9.5.3",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "editorMode": "builder",
+              "exemplar": false,
+              "expr": "{__name__=\"yt_scheduler_pools_dominant_fair_share_integral_guarantee\", tree=\"$pool_tree\", pool=\"$pool\"}",
+              "instant": false,
+              "legendFormat": "integral guarantee",
+              "range": true,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "editorMode": "builder",
+              "exemplar": false,
+              "expr": "{__name__=\"yt_scheduler_pools_dominant_fair_share_strong_guarantee\", tree=\"$pool_tree\", pool=\"$pool\"}",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "strong guarantee",
+              "range": true,
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "editorMode": "builder",
+              "exemplar": false,
+              "expr": "{__name__=\"yt_scheduler_pools_dominant_fair_share_weight_proportional\", tree=\"$pool_tree\", pool=\"$pool\"}",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "weight proportional",
+              "range": true,
+              "refId": "C"
+            }
+          ],
+          "title": "Dominant fair share: strong, integral, weight proportional",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "grafana"
+          },
+          "gridPos": {
+            "h": 5,
+            "w": 24,
+            "x": 0,
+            "y": 33
+          },
+          "id": 6,
+          "options": {
+            "code": {
+              "language": "plaintext",
+              "showLineNumbers": false,
+              "showMiniMap": false
+            },
+            "content": "<p>\n<br><b>Usage, Demand, Fair share</b>: share of the cluster that is used, demanded or should be given to the pool. For example, 1.0 or 100% corresponds to the total amount of resources in the cluster.\n<br><b>CPU. RAM, GPU fair share components</b> help to determine pool's dominant resource.\n</p>\n<p>\nIn addition, fair share can be split into three parts: strong guarantee, integral guarantee and free resources, which are distributed between pools in proportion to their weights.\n</p>",
+            "mode": "html"
+          },
+          "pluginVersion": "9.5.3",
+          "type": "text"
+        },
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "grafana"
+          },
+          "gridPos": {
+            "h": 2,
+            "w": 24,
+            "x": 0,
+            "y": 38
+          },
+          "id": 18,
+          "options": {
+            "code": {
+              "language": "plaintext",
+              "showLineNumbers": false,
+              "showMiniMap": false
+            },
+            "content": "# Job Metrics",
+            "mode": "markdown"
+          },
+          "pluginVersion": "9.5.3",
+          "transparent": true,
+          "type": "text"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  }
+                ]
+              },
+              "unit": "none"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 40
+          },
+          "id": 4,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "editorMode": "builder",
+              "exemplar": false,
+              "expr": "rate({__name__=\"yt_scheduler_pools_metrics_user_job_io_total\", tree=\"$pool_tree\", pool=\"$pool\"}[$__rate_interval])",
+              "instant": false,
+              "legendFormat": "user job io rate",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Job metrics: local disk IO",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "CPU, cores",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  }
+                ]
+              },
+              "unit": "none"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 40
+          },
+          "id": 19,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "editorMode": "builder",
+              "exemplar": false,
+              "expr": "rate({__name__=\"yt_scheduler_pools_metrics_user_job_cpu_system\", tree=\"$pool_tree\", pool=\"$pool\"}[$__rate_interval])",
+              "instant": false,
+              "legendFormat": "user job system cpu rate",
+              "range": true,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "editorMode": "builder",
+              "exemplar": false,
+              "expr": "rate({__name__=\"yt_scheduler_pools_metrics_user_job_cpu_user\", tree=\"$pool_tree\", pool=\"$pool\"}[$__rate_interval])",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "user job user cpu rate",
+              "range": true,
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "editorMode": "builder",
+              "exemplar": false,
+              "expr": "rate({__name__=\"yt_scheduler_pools_metrics_job_proxy_cpu_system\", tree=\"$pool_tree\", pool=\"$pool\"}[$__rate_interval])",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "job proxy system cpu rate",
+              "range": true,
+              "refId": "C"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "editorMode": "builder",
+              "exemplar": false,
+              "expr": "rate({__name__=\"yt_scheduler_pools_metrics_job_proxy_cpu_user\", tree=\"$pool_tree\", pool=\"$pool\"}[$__rate_interval])",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "job proxy user cpu rate",
+              "range": true,
+              "refId": "D"
+            }
+          ],
+          "title": "Job metrics: CPU usage",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "grafana"
+          },
+          "gridPos": {
+            "h": 5,
+            "w": 24,
+            "x": 0,
+            "y": 48
+          },
+          "id": 22,
+          "options": {
+            "code": {
+              "language": "plaintext",
+              "showLineNumbers": false,
+              "showMiniMap": false
+            },
+            "content": "<p>\n<br><b>Local disk I/O</b>: total amount of input/output operations per second (IOPS) of all user jobs in the pool.\n<br><b>CPU usage</b>: total detailed CPU usage statistics of all user jobs and their job proxies in the pool.\n</p>\n<p>\nConsult documentation for more information on the corresponding job statistics.\n</p>",
+            "mode": "html"
+          },
+          "pluginVersion": "9.5.3",
+          "type": "text"
+        },
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "grafana"
+          },
+          "gridPos": {
+            "h": 2,
+            "w": 24,
+            "x": 0,
+            "y": 53
+          },
+          "id": 13,
+          "options": {
+            "code": {
+              "language": "plaintext",
+              "showLineNumbers": false,
+              "showMiniMap": false
+            },
+            "content": "# Integral guarantee",
+            "mode": "markdown"
+          },
+          "pluginVersion": "9.5.3",
+          "transparent": true,
+          "type": "text"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  }
+                ]
+              },
+              "unit": "none"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 8,
+            "x": 0,
+            "y": 55
+          },
+          "id": 9,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "editorMode": "builder",
+              "exemplar": false,
+              "expr": "{__name__=\"yt_scheduler_pools_accumulated_resource_volume_cpu\", tree=\"$pool_tree\", pool=\"$pool\"}",
+              "instant": false,
+              "legendFormat": "accumulated cpu",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Accumulated resource volume: CPU",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  }
+                ]
+              },
+              "unit": "none"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 8,
+            "x": 8,
+            "y": 55
+          },
+          "id": 33,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "editorMode": "builder",
+              "exemplar": false,
+              "expr": "{__name__=\"yt_scheduler_pools_accumulated_resource_volume_user_memory\", tree=\"$pool_tree\", pool=\"$pool\"}",
+              "instant": false,
+              "legendFormat": "accumulated memory",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Accumulated resource volume: RAM",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  }
+                ]
+              },
+              "unit": "none"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 8,
+            "x": 16,
+            "y": 55
+          },
+          "id": 31,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "editorMode": "builder",
+              "exemplar": false,
+              "expr": "{__name__=\"yt_scheduler_pools_accumulated_volume_dominant_share\", tree=\"$pool_tree\", pool=\"$pool\"}",
+              "instant": false,
+              "legendFormat": "accumulated dominant resource share",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Accumulated resource volume share",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  }
+                ]
+              },
+              "unit": "none"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 8,
+            "x": 0,
+            "y": 63
+          },
+          "id": 32,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "editorMode": "builder",
+              "exemplar": false,
+              "expr": "{__name__=\"yt_scheduler_pools_accepted_free_volume_cpu\", tree=\"$pool_tree\", pool=\"$pool\"}",
+              "instant": false,
+              "legendFormat": "accepted free cpu",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Accepted free volume: CPU",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  }
+                ]
+              },
+              "unit": "none"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 8,
+            "x": 8,
+            "y": 63
+          },
+          "id": 30,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "editorMode": "builder",
+              "exemplar": false,
+              "expr": "{__name__=\"yt_scheduler_pools_accepted_free_volume_user_memory\", tree=\"$pool_tree\", pool=\"$pool\"}",
+              "instant": false,
+              "legendFormat": "accepted free memory",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Accepted free volume: RAM",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "grafana"
+          },
+          "gridPos": {
+            "h": 5,
+            "w": 24,
+            "x": 0,
+            "y": 71
+          },
+          "id": 17,
+          "options": {
+            "code": {
+              "language": "plaintext",
+              "showLineNumbers": false,
+              "showMiniMap": false
+            },
+            "content": "<p>\n  The following metrics are only relevant for pools with burst or relaxed integral guarantees.\n  <br><b>Accumulated resource volume share</b>: amount of virtual resources accumulated in the pool which can be spent on integral guarantees. In cluster_share*sec.\n  <br><b>Accumulated resource volume (CPU/RAM)</b>: approximate amount of accumulated resources computed based on accumulated volume share and the current total resource amount in the cluster. In cpu*sec/bytes*sec.\n  <br><b>Accepted free volume (CPU/RAM)</b>: virtual resource volume which was obtained by the pool via redistribution of other pools' unused integral resource flows.\n</p>\n<p>\n  Consult documentation for more information on intergral guarantees.\n</p>",
+            "mode": "html"
+          },
+          "pluginVersion": "9.5.3",
+          "type": "text"
+        }
+      ],
+      "refresh": "",
+      "schemaVersion": 38,
+      "style": "dark",
+      "tags": [],
+      "templating": {
+        "list": [
+          {
+            "current": {},
+            "hide": 0,
+            "label": "Cluster",
+            "name": "cluster",
+            "options": [],
+            "query": "",
+            "skipUrlSync": false,
+            "type": "textbox"
+          },
+          {
+            "current": {
+              "selected": false,
+              "text": "default",
+              "value": "default"
+            },
+            "hide": 0,
+            "label": "Pool tree",
+            "name": "pool_tree",
+            "options": [
+              {
+                "selected": true,
+                "text": "",
+                "value": ""
+              }
+            ],
+            "query": "default",
+            "skipUrlSync": false,
+            "type": "textbox"
+          },
+          {
+            "current": {
+              "selected": false,
+              "text": "research",
+              "value": "research"
+            },
+            "hide": 0,
+            "label": "pool",
+            "name": "pool",
+            "options": [
+              {
+                "selected": true,
+                "text": "",
+                "value": ""
+              }
+            ],
+            "query": "research",
+            "skipUrlSync": false,
+            "type": "textbox"
+          }
+        ]
+      },
+      "time": {
+        "from": "now-6h",
+        "to": "now"
+      },
+      "timepicker": {},
+      "timezone": "",
+      "title": "Pool dashboard for UI",
+      "uid": "Pool_dashboard_for_UI",
+      "version": 1,
+      "weekStart": ""
+    }
+  yt-masters-internal.json: |-
+    {
+      "annotations": {
+        "list": [
+          {
+            "builtIn": 1,
+            "datasource": {
+              "type": "grafana",
+              "uid": "-- Grafana --"
+            },
+            "enable": true,
+            "hide": true,
+            "iconColor": "rgba(0, 211, 255, 1)",
+            "name": "Annotations & Alerts",
+            "type": "dashboard"
+          }
+        ]
+      },
+      "editable": true,
+      "fiscalYearStartMonth": 0,
+      "graphTooltip": 0,
+      "id": 5,
+      "links": [],
+      "liveNow": false,
+      "panels": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 12,
+            "w": 12,
+            "x": 0,
+            "y": 0
+          },
+          "id": 1,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "editorMode": "builder",
+              "expr": "{cluster=\"$cluster\", __name__=\"yt_resource_tracker_user_cpu\", thread=\"Automaton\"}",
+              "legendFormat": "{{pod}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Automaton Threads",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 12,
+            "x": 12,
+            "y": 0
+          },
+          "id": 2,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "editorMode": "builder",
+              "expr": "{cluster=\"$cluster\", __name__=\"yt_chunk_server_lost_vital_chunk_count\", cell_tag=~\".+\"}",
+              "legendFormat": "{{cell_tag}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Lost Vital Chunks",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 12,
+            "x": 12,
+            "y": 6
+          },
+          "id": 3,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "editorMode": "builder",
+              "expr": "{cluster=\"$cluster\", __name__=\"yt_chunk_server_data_missing_chunk_count\", cell_tag=~\".+\"}",
+              "legendFormat": "{{cell_tag}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Data Missing Chunks",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 12,
+            "x": 0,
+            "y": 12
+          },
+          "id": 6,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "editorMode": "builder",
+              "expr": "rate({cluster=\"$cluster\", __name__=\"yt_security_user_read_request_count\", user=\"root\"}[$__rate_interval])",
+              "legendFormat": "{{pod}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Read Request Rate",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 12,
+            "x": 12,
+            "y": 12
+          },
+          "id": 4,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "editorMode": "builder",
+              "expr": "{cluster=\"$cluster\", __name__=\"yt_chunk_server_parity_missing_chunk_count\", cell_tag=~\".+\"}",
+              "legendFormat": "{{cell_tag}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Parity Missing Chunks",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 12,
+            "x": 0,
+            "y": 18
+          },
+          "id": 7,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "editorMode": "builder",
+              "expr": "rate({cluster=\"$cluster\", __name__=\"yt_security_user_read_time\", user=\"root\"}[$__rate_interval])",
+              "legendFormat": "{{pod}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Read Request Time",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "YT-prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 12,
+            "x": 12,
+            "y": 18
+          },
+          "id": 5,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "YT-prometheus"
+              },
+              "editorMode": "builder",
+              "expr": "{cluster=\"$cluster\", __name__=\"yt_chunk_server_underreplicated_chunk_count\", cell_tag=~\".+\"}",
+              "legendFormat": "{{cell_tag}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Underreplicated Chunks",
+          "type": "timeseries"
+        }
+      ],
+      "refresh": "",
+      "schemaVersion": 38,
+      "style": "dark",
+      "tags": [],
+      "templating": {
+        "list": [
+          {
+            "current": {},
+            "hide": 0,
+            "name": "cluster",
+            "options": [],
+            "query": "",
+            "skipUrlSync": false,
+            "type": "textbox"
+          }
+        ]
+      },
+      "time": {
+        "from": "now-6h",
+        "to": "now"
+      },
+      "timepicker": {},
+      "timezone": "",
+      "title": "YT Masters Internal",
+      "uid": "yt-masters-internal",
+      "version": 1,
+      "weekStart": ""
+    }
+metadata:
+  name: grafana-dashboards

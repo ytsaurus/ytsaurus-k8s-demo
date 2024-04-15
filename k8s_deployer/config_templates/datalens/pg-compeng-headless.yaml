@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: pg-compeng-headless
+  labels:
+    name: pg-compeng
+spec:
+  type: ClusterIP
+  clusterIP: None
+  selector:
+    name: pg-compeng

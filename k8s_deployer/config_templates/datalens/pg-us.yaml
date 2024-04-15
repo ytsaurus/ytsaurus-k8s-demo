@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: pg-us
+  labels:
+    name: pg-us
+spec:
+  replicas: 1
+  serviceName: pg-us-headless
+  selector:
+    matchLabels:
+      name: pg-us
+  template:
+    metadata:
+      labels:
+        name: pg-us
+    spec:
+      containers:
+        - name: pg-us
+          image: cr.yandex/crpgg53svilvkn982otu/postgres:13-alpine
+          env:
+            # ToDo(psushin): put it to secret.
+            - name: POSTGRES_PASSWORD
+              value: us
+            - name: POSTGRES_DB
+              value: us-db-ci_purgeable
+            - name: POSTGRES_USER
+              value: us
+          resources:
+            requests:
+              cpu: 250m
+              memory: 2G
+          volumeMounts:
+          - name: data
+            mountPath: /var/lib/postgresql
+
+      restartPolicy: Always
+      
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: "yc-network-ssd"
+      resources:
+        requests:
+          storage: 1Gi
