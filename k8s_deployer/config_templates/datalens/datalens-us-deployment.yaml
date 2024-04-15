@@ -28,7 +28,7 @@ spec:
           value: "0"
         - name: HC
           value: "1"
-        image: cr.yandex/crpgg53svilvkn982otu/datalens-tech/datalens-us:0.116.0
+        image: "{{ str(images.datalens_us) }}"
         name: datalens-us
         ports:
         - containerPort: 80

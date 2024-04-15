@@ -85,7 +85,7 @@ spec:
           value: /var/lib/grafana/plugins
         - name: GF_PATHS_PROVISIONING
           value: /etc/grafana/provisioning
-        image: cr.yandex/crpgg53svilvkn982otu/grafana/grafana:9.5.3
+        image: "{{ str(images.grafana) }}"
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 10

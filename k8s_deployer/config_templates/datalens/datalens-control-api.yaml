@@ -33,7 +33,7 @@ spec:
           value: "fake-us-master-token"
         - name: CONFIG_PATH
           value: "/etc/backend-configs/api.yaml"
-        image: cr.yandex/crpgg53svilvkn982otu/datalens-tech/datalens-control-api:0.2038.1
+        image: "{{ str(images.datalens_control_api) }}"
         name: datalens-control-api
         ports:
         - containerPort: 8080

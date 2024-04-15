@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: pg-compeng
-          image: cr.yandex/crpgg53svilvkn982otu/postgres:13-alpine
+          image: "{{ str(images.postgres) }}"
           env:
             - name: POSTGRES_PASSWORD
               value: postgres

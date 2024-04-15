@@ -33,7 +33,7 @@ spec:
           value: http://datalens-control-api.{{namespace}}.svc.cluster.local:8080
         - name: BI_DATA_ENDPOINT
           value: http://datalens-data-api.{{namespace}}.svc.cluster.local:8080
-        image: cr.yandex/crpgg53svilvkn982otu/datalens-tech/datalens-ui:0.955.0
+        image: "{{ str(images.datalens_ui) }}"
         name: datalens-ui
         ports:
         - containerPort: 80

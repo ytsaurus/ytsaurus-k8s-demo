@@ -122,7 +122,6 @@ spec:
 
   ui:
     serviceType: NodePort
-    useMetrikaCounter: true
     instanceCount: 1
 
   strawberry:

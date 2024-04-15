@@ -4,13 +4,14 @@ from pprint import pformat
 
 import click
 import yaml
-from datalens_connection import make_datalens_cypher
-from image_config import images
 from kubernetes import client
 from kubernetes.utils import create_from_yaml
-from stub import DEMO_CONTOUR_FLAG
-from stub import base_logger as logger
-from stub import jinja_env, main, setup_k8s_config
+
+from .datalens_connection import make_datalens_cypher
+from .image_config import images
+from .stub import DEMO_CONTOUR_FLAG
+from .stub import base_logger as logger
+from .stub import jinja_env, setup_k8s_config
 
 plural_makers = [
     lambda kind: kind.lower(),
@@ -30,17 +31,20 @@ def create_custom_object_from_spec(namespace, body):
     customObjectApi = client.CustomObjectsApi()
     group, version = body["apiVersion"].split("/")
     for plural_maker in plural_makers:
+        plular = plural_maker(body["kind"])
         try:
-            logger.info("Attempting plural: %s", plural_maker(body["kind"]))
-            return customObjectApi.create_namespaced_custom_object(
+            logger.info("Attempting plural: %s", plular)
+            custom_object = customObjectApi.create_namespaced_custom_object(
                 group,
                 version,
                 namespace,
-                plural_maker(body["kind"]),
+                plular,
                 body,
             )
+            logger.info(f"Successfully applied custom object {plular}")
+            return custom_object
         except client.exceptions.ApiException as e:
-            logger.info("Error")
+            logger.exception(f"Error while creating custom object {plular}")
             exception = e
     raise exception
 
@@ -68,7 +72,7 @@ def create_object(
     )
 
 
-@main.group()
+@click.group()
 def steps():
     pass
 
@@ -113,6 +117,7 @@ class NamespaceCreator:
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         if exc_type is not None:
+            logger.exception(f"Got exception in NamespaceCreator. Will remove namespace: ({exc_type}) {exc_tb}")
             self.ctx.invoke(remove, namespace=self.name)
 
 
