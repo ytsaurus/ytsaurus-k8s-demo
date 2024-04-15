@@ -42,4 +42,11 @@ images = {
         img="ytsaurus/query-tracker",
         tag="0.0.5-ya-build-relwithdebinfo",
     ),
+    "grafana": ImageEntry(img="grafana/grafana", tag="9.5.3"),
+    "datalens_control_api": ImageEntry(img="datalens-tech/datalens-control-api", tag="0.2038.1"),
+    "datalens_data_api": ImageEntry(img="datalens-tech/datalens-data-api", tag="0.2038.1"),
+    "datalens_ui": ImageEntry(img="datalens-tech/datalens-ui", tag="0.955.0"),
+    "datalens_us": ImageEntry(img="datalens-tech/datalens-us", tag="0.116.0"),
+    "datalens_pg_dump": ImageEntry(img="custom/datalens-pg-dump", tag="0.0.1"),
+    "postgres": ImageEntry(img="postgres", tag="13-alpine"),
 }

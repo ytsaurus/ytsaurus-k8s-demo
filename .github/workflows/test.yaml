@@ -1,0 +1,140 @@
+name: Test K8S demo
+on: 
+  pull_request:
+    branches:
+      - main
+      - dev
+env:
+  K8S_HOST: ${{ vars.YC_OS_K8S_HOST }}
+  YC_DEMO_REGISTRY_ID: ${{ vars.YC_DEMO_REGISTRY_ID }}
+  HELM_CHART_VERSION: ${{ vars.HELM_CHART_VERSION }}
+  CONTOUR: testing
+jobs:
+  start-vm:
+    name: Start VM
+    runs-on: trampoline
+    outputs:
+      label: ${{ steps.start-yc-runner.outputs.label }}
+      instance-id: ${{ steps.start-yc-runner.outputs.instance-id }}
+    steps:
+      - name: Start YC runner
+        id: start-yc-runner
+        uses: yc-actions/yc-github-runner@v1
+        with:
+          mode: start
+          yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
+          github-token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+          folder-id: ${{ vars.YC_FOLDER_ID }}
+          image-id: ${{ vars.YC_DEFAULT_IMAGE_ID }}
+          zone-id: ${{ vars.YC_ZONE_ID }}
+          subnet-id: ${{ vars.YC_SUBNET_ID }}
+          cores: 16
+          memory: 32GB
+          core-fraction: 100
+          disk-type: network-ssd-nonreplicated
+          disk-size: 93GB
+  checkout:
+    name: Checkout sources
+    needs: start-vm
+    runs-on: ${{ needs.start-vm.outputs.label }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+  check:
+    name: Run checks
+    needs:
+      - start-vm
+      - checkout
+    runs-on: ${{ needs.start-vm.outputs.label }}
+    timeout-minutes: 70
+    steps:
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - name: Install dependencies
+        run: |
+          sudo apt-get -y install libpq-dev jq
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt -r dev.requirements.txt
+      - name: Prepare enviroment
+        shell: bash
+        run: |
+          export HOME=/root
+          export HELM_EXPERIMENTAL_OCI=1
+          export PATH=/usr/local/bin:$PATH
+
+          echo '${{ secrets.YC_SA_JSON_CREDENTIALS }}' > sa.json
+          yc config set service-account-key sa.json
+          yc iam create-token > /dev/null
+          /usr/local/bin/yc managed-kubernetes cluster get-credentials --id catam8govqco1ladv4gv --internal --force
+
+          echo $(yc iam create-token) | helm registry login cr.yandex -u iam --password-stdin
+          yc container registry configure-docker
+
+          namespace=$(date +"%Y%m%d-%H%M")${INVOCATION_ID:0:2}
+          name_cluster="os${namespace}"
+
+          kubectl get MutatingWebhookConfiguration,ValidatingWebhookConfiguration -A
+
+          kubectl create namespace ${namespace}
+          kubectl delete crd chyts.cluster.ytsaurus.tech ytsaurus.cluster.ytsaurus.tech spyts.cluster.ytsaurus.tech remoteexecnodes.cluster.ytsaurus.tech remoteytsaurus.cluster.ytsaurus.tech || true
+          helm install -n ${namespace} ${name_cluster} oci://cr.yandex/$YC_DEMO_REGISTRY_ID/ytsaurus/helm/ytop-chart --version $HELM_CHART_VERSION
+
+          echo "IAM_TOKEN=$(yc iam create-token)" > /tmp/os-demo-env.txt
+          echo "NAMESPACE_NAME=${namespace}" >> /tmp/os-demo-env.txt
+          kubectl config view --raw -o json | jq -r '.clusters[0].cluster."certificate-authority-data"' | tr -d '"' | base64 --decode > /tmp/os-demo-certificate_authority
+
+          sleep 120
+          kubectl get services -n ${namespace}
+          kubectl get pods -n ${namespace}
+
+
+      - name: Run tests
+        run: |
+          export PYTHONPATH="${PYTHONPATH}:$(pwd)"
+          pytest -rA  --log-cli-level=INFO --log-level=INFO tests/*
+  clean-up:
+    name: Clean up
+    needs:
+      - start-vm
+      - check
+    runs-on: ${{ needs.start-vm.outputs.label }}
+    if: ${{ always() }}
+    steps:
+      - name: Unintall operator
+        shell: bash
+        run: |
+          export HOME=/root
+          namespace=$(cat /tmp/os-demo-env.txt | sed -n '2 p' | awk -F '=' '{print $2}')
+          name_cluster="os${namespace}"
+          helm uninstall -n ${namespace} ${name_cluster}
+          helm list --all-namespaces 
+      - name: Delete namespace
+        shell: bash
+        run: |
+          export HOME=/root
+          namespace=$(cat /tmp/os-demo-env.txt | sed -n '2 p' | awk -F '=' '{print $2}')
+          kubectl delete namespace ${namespace}
+  stop-vm:
+    name: Stop VM
+    needs:
+      - start-vm
+      - check
+      - clean-up
+    runs-on: trampoline
+    if: ${{ always() }}
+    steps:
+      - name: Stop YC runner
+        uses: yc-actions/yc-github-runner@v1
+        with:
+          mode: stop
+          yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
+          github-token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+          label: ${{ needs.start-vm.outputs.label }}
+          instance-id: ${{ needs.start-vm.outputs.instance-id }}
+
+
+    
+
+      

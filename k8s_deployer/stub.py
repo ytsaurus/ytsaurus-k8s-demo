@@ -1,8 +1,7 @@
 import base64
 import logging
-import os
+from pathlib import Path
 
-import click
 import jinja2
 from kubernetes import client, config
 
@@ -16,7 +15,7 @@ else:
 root_handler.setFormatter(logging.Formatter("[%(asctime)s] %(levelname)s [%(name)s.%(funcName)s:%(lineno)d] %(message)s"))
 base_logger = logging.getLogger("yt-demo")
 
-jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader("config_templates"))
+jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(Path(__file__).with_name("config_templates")))
 jinja_env.filters["b64encode"] = base64.b64encode
 
 DEMO_CONTOUR_FLAG = "yt-demo-contour"
@@ -33,11 +32,3 @@ def setup_k8s_config(configuration=None):
     elif not k8s_config_set:
         config.load_kube_config()
     k8s_config_set = True
-
-
-@click.group()
-@click.pass_context
-def main(ctx):
-    ctx.obj = {
-        DEMO_CONTOUR_FLAG: os.environ.get("CONTOUR"),
-    }

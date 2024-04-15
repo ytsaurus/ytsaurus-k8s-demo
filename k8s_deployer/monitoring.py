@@ -6,12 +6,12 @@ import click
 import requests
 from kubernetes import client
 from sqlalchemy import func, select
-from stub import (
+
+from .stub import (
     DEMO_CONTOUR_FLAG,
     MONITORING_DEFAULT_DEMAND_MARGIN,
     MONITORING_DEFAULT_PING_MARGIN,
     base_logger,
-    main,
     setup_k8s_config,
 )
 
@@ -61,7 +61,7 @@ class Metrics:
         )
 
 
-@main.group()
+@click.group()
 @click.option("--user", envvar="DB_USER")
 @click.option("--password", envvar="DB_PASS")
 @click.option("--host", envvar="DB_HOST")

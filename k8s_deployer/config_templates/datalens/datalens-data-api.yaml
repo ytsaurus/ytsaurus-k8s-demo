@@ -39,7 +39,7 @@ spec:
           value: "1"
         - name: BI_COMPENG_PG_URL
           value: "postgresql://postgres:postgres@pg-compeng-0.pg-compeng-headless.{{namespace}}.svc.cluster.local:5432/postgres"
-        image: cr.yandex/crpgg53svilvkn982otu/datalens-tech/datalens-data-api:0.2038.1
+        image: "{{ str(images.datalens_data_api) }}"
         name: datalens-data-api
         ports:
         - containerPort: 8080

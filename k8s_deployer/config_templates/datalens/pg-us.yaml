@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: pg-us
-          image: cr.yandex/crpgg53svilvkn982otu/postgres:13-alpine
+          image: "{{ str(images.postgres) }}"
           env:
             # ToDo(psushin): put it to secret.
             - name: POSTGRES_PASSWORD

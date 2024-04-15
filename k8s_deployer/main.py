@@ -1,11 +1,14 @@
 import base64
 import json
 import os
+from pathlib import Path
 
 from click.testing import CliRunner
 from kubernetes import client
-from stub import base_logger as logger
-from stub import main, setup_k8s_config
+
+from .cli import main
+from .stub import base_logger as logger
+from .stub import setup_k8s_config
 
 
 def configure_k8s(token):
@@ -13,10 +16,14 @@ def configure_k8s(token):
     configuration.api_key["authorization"] = token
     configuration.api_key_prefix["authorization"] = "Bearer"
     configuration.host = os.environ["K8S_HOST"]
+
     certificate_file_name = "certificate_authority"
-    configuration.ssl_ca_cert = certificate_file_name
-    with open(os.path.join(os.getcwd(), certificate_file_name), "w") as f:
+    p = Path(__file__).with_name(certificate_file_name)
+    with open(p, "w") as f:
         f.write(os.environ["K8S_SSL_CERTIFICATE"])
+
+    configuration.ssl_ca_cert = str(p)
+
     logger.info("Setting k8s config: %s", str(configuration))
     setup_k8s_config(configuration)
     logger.info("Configuration done")

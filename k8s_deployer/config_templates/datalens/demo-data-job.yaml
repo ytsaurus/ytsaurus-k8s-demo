@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
         - name: setup-datalens-demo-data
-          image: cr.yandex/crpgg53svilvkn982otu/custom/datalens-pg-dump:0.0.1
+          image: "{{ str(images.datalens_pg_dump) }}"
           volumeMounts:
             - mountPath: /entries-patch.sql
               name: datalens-pg-dump-patch

@@ -5,13 +5,14 @@ from pprint import pformat
 import click
 from kubernetes import client
 from sqlalchemy import desc, select
-from steps import create, remove
-from stub import base_logger, main, setup_k8s_config
+
+from .steps import create, remove
+from .stub import base_logger, setup_k8s_config
 
 logger = base_logger.getChild("db_watcher")
 
 
-@main.group()
+@click.group()
 @click.option("--user", envvar="DB_USER")
 @click.option("--password", envvar="DB_PASS")
 @click.option("--host", envvar="DB_HOST")

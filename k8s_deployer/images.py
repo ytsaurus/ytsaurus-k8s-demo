@@ -1,10 +1,10 @@
 import click
-from image_config import images
-from image_config import repo as cloud_repo
-from stub import main
+
+from .image_config import images
+from .image_config import repo as cloud_repo
 
 
-@main.command()
+@click.command()
 def refresh_images():
     import docker
 
