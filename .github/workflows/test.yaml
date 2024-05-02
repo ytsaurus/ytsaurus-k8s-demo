@@ -83,6 +83,7 @@ jobs:
 
           echo "IAM_TOKEN=$(yc iam create-token)" > /tmp/os-demo-env.txt
           echo "NAMESPACE_NAME=${namespace}" >> /tmp/os-demo-env.txt
+          echo "NAMESPACE_NAME=${namespace}" >> $GITHUB_ENV
           kubectl config view --raw -o json | jq -r '.clusters[0].cluster."certificate-authority-data"' | tr -d '"' | base64 --decode > /tmp/os-demo-certificate_authority
 
           sleep 120
@@ -94,6 +95,8 @@ jobs:
         run: |
           export PYTHONPATH="${PYTHONPATH}:$(pwd)"
           pytest -rA  --log-cli-level=INFO --log-level=INFO tests/*
+          POD_NAME=$(kubectl -n $NAMESPACE_NAME get pods --selector=name=jupyterlab -o=name)
+          kubectl -n $NAMESPACE_NAME exec -it $POD_NAME -- pytest /home/jovyan/test.py
   clean-up:
     name: Clean up
     needs:
