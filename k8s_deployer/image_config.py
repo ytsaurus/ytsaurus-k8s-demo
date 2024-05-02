@@ -23,7 +23,7 @@ images = {
     ),
     "jupyter": ImageEntry(
         img="ytsaurus/jupyter-tutorial",
-        tag="0.0.31-datalens-intro",
+        tag="0.0.31-datalens-intro-with-test",
     ),
     "demo_data": ImageEntry(
         img="ytsaurus/demo_data",
