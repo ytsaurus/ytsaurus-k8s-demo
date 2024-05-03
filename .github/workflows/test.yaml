@@ -97,7 +97,7 @@ jobs:
           kubectl -n ${namespace} set env sts/jupyterlab EXCLUDE_NOTEBOOKS="${EXCLUDE_NOTEBOOKS}"
           sleep 15
           JUPYTER_POD_NAME=$(kubectl -n ${namespace} get pods --selector=name=jupyterlab -o=name)
-          kubectl -n ${namespace} exec -it $JUPYTER_POD_NAME -- pytest /home/jovyan/test.py
+          kubectl -n ${namespace} exec -it $JUPYTER_POD_NAME -- pytest -rA  --log-cli-level=INFO --log-level=INFO /home/jovyan/test.py
           
   clean-up:
     name: Clean up
