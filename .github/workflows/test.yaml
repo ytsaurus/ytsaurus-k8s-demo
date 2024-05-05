@@ -9,6 +9,7 @@ env:
   YC_DEMO_REGISTRY_ID: ${{ vars.YC_DEMO_REGISTRY_ID }}
   HELM_CHART_VERSION: ${{ vars.HELM_CHART_VERSION }}
   CONTOUR: testing
+  EXCLUDE_NOTEBOOKS: ${{ vars.EXCLUDE_NOTEBOOKS }}
 jobs:
   start-vm:
     name: Start VM
@@ -57,7 +58,7 @@ jobs:
           sudo apt-get -y install libpq-dev jq
           python -m pip install --upgrade pip
           pip install -r requirements.txt -r dev.requirements.txt
-      - name: Prepare enviroment
+      - name: Run tests
         shell: bash
         run: |
           export HOME=/root
@@ -83,17 +84,21 @@ jobs:
 
           echo "IAM_TOKEN=$(yc iam create-token)" > /tmp/os-demo-env.txt
           echo "NAMESPACE_NAME=${namespace}" >> /tmp/os-demo-env.txt
+          echo "NAMESPACE_NAME=${namespace}" >> $GITHUB_ENV
           kubectl config view --raw -o json | jq -r '.clusters[0].cluster."certificate-authority-data"' | tr -d '"' | base64 --decode > /tmp/os-demo-certificate_authority
 
           sleep 120
           kubectl get services -n ${namespace}
           kubectl get pods -n ${namespace}
 
-
-      - name: Run tests
-        run: |
           export PYTHONPATH="${PYTHONPATH}:$(pwd)"
           pytest -rA  --log-cli-level=INFO --log-level=INFO tests/*
+
+          kubectl -n ${namespace} set env sts/jupyterlab EXCLUDE_NOTEBOOKS="${EXCLUDE_NOTEBOOKS}"
+          sleep 15
+          JUPYTER_POD_NAME=$(kubectl -n ${namespace} get pods --selector=name=jupyterlab -o=name)
+          kubectl -n ${namespace} exec -it $JUPYTER_POD_NAME -- pytest -rA  --log-cli-level=INFO --log-level=INFO /home/jovyan/test.py
+          
   clean-up:
     name: Clean up
     needs:

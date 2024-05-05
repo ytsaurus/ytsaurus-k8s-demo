@@ -6,13 +6,17 @@ export HELM_EXPERIMENTAL_OCI=1
 export YC_DEMO_REGISTRY_ID=crptkkbc0947ickrtnp7
 export HELM_CHART_VERSION=0.0.278-dev-f80709464c1f4031df1346b7f81a2179dec7a547-ui-fix
 
-
-echo $(yc iam create-token) | helm registry login cr.yandex -u iam --password-stdin
-yc container registry configure-docker
-helm install -n testing ytsaurus oci://cr.yandex/$YC_DEMO_REGISTRY_ID/ytsaurus/helm/ytop-chart --version $HELM_CHART_VERSION
+if [ -z "${YC_TOKEN}" ]; then
+  YC_TOKEN=$(yc iam create-token)
+fi
+echo $YC_TOKEN | helm registry login cr.yandex -u iam --password-stdin
+echo $YC_TOKEN | docker login --username iam --password-stdin cr.yandex
 
 kubectl create -n testing secret generic regcred --from-file=.dockerconfigjson=$HOME/.docker/config.json --type=kubernetes.io/dockerconfigjson
 kubectl patch -n testing serviceaccount default -p '{"imagePullSecrets": [{"name": "regcred"}]}'
+
+helm install -n testing ytsaurus oci://registry-1.docker.io/ytsaurus/ytop-chart --version 0.8.0
+#helm install -n testing ytsaurus oci://cr.yandex/$YC_DEMO_REGISTRY_ID/ytsaurus/helm/ytop-chart --version $HELM_CHART_VERSION --set serviceAccountName=default
 
 echo '
 apiVersion: rbac.authorization.k8s.io/v1
@@ -53,4 +57,4 @@ sleep 100
 kubectl get pods -n testing
 kubectl get services --all-namespaces
 
-pytest -rA tests/*
+pytest -rA  --log-cli-level=INFO --log-level=INFO tests/*
