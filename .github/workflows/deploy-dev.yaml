@@ -13,7 +13,6 @@ env:
 jobs:
     deploy:
       name: Deploy
-      if: github.event.pull_request.merged == true
       environment: dev
       runs-on: trampoline
       steps:
@@ -46,8 +45,6 @@ jobs:
               cloud_functions.py
             exclude: | 
               **/*.pyc
-            tags: |
-              ${{ GITHUB_SHA::6 }}
         - name: Deploy Create Function
           uses: yc-actions/yc-sls-function@v2
           with:
@@ -77,8 +74,7 @@ jobs:
               cloud_functions.py
             exclude: | 
               **/*.pyc
-            tags: |
-              ${{ GITHUB_SHA::6 }}
+
         - name: Deploy Remove Function
           uses: yc-actions/yc-sls-function@v2
           with:
@@ -108,8 +104,7 @@ jobs:
               cloud_functions.py
             exclude: | 
               **/*.pyc
-            tags: |
-              ${{ GITHUB_SHA::6 }}
+
         - name: Deploy Monitoring Function
           uses: yc-actions/yc-sls-function@v2
           with:
@@ -139,8 +134,7 @@ jobs:
               cloud_functions.py
             exclude: | 
               **/*.pyc
-            tags: |
-              ${{ GITHUB_SHA::6 }}
+
         - name: Deploy Registration Function
           uses: yc-actions/yc-sls-function@v2
           with:
@@ -170,8 +164,7 @@ jobs:
               cloud_functions.py
             exclude: | 
               **/*.pyc
-            tags: |
-              ${{ GITHUB_SHA::6 }}
+
         - name: Deploy Timeslots Function
           uses: yc-actions/yc-sls-function@v2
           with:
@@ -201,6 +194,5 @@ jobs:
               cloud_functions.py
             exclude: | 
               **/*.pyc
-            tags: |
-              ${{ GITHUB_SHA::6 }}
+
 
