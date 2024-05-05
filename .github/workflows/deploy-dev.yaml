@@ -1,7 +1,6 @@
 name: Deploy everything to dev
 on: workflow_dispatch
 env:
-  FUNCTIONS_SUFFIX: 4testing
   CONTOUR: testing
   DB_PASS_KEY: pg-password-demo_manager_test
   DB_PORT_KEY: pg-port
@@ -21,7 +20,7 @@ jobs:
           with:
             yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
             folder-id: ${{ secrets.YC_OS_FOLDER_ID }}
-            function-name: 'k8s-db-watcher$FUNCTIONS_SUFFIX'
+            function-name: 'k8s-db-watcher4testing'
             runtime: 'python311'
             memory: '128Mb'
             execution-timeout: '600s'
@@ -50,7 +49,7 @@ jobs:
           with:
             yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
             folder-id: ${{ secrets.YC_OS_FOLDER_ID }}
-            function-name: 'k8s-create$FUNCTIONS_SUFFIX'
+            function-name: 'k8s-create4testing'
             runtime: 'python311'
             memory: '128Mb'
             execution-timeout: '600s'
@@ -80,7 +79,7 @@ jobs:
           with:
             yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
             folder-id: ${{ secrets.YC_OS_FOLDER_ID }}
-            function-name: 'k8s-remove$FUNCTIONS_SUFFIX'
+            function-name: 'k8s-remove4testing'
             runtime: 'python311'
             memory: '128Mb'
             execution-timeout: '600s'
@@ -110,7 +109,7 @@ jobs:
           with:
             yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
             folder-id: ${{ secrets.YC_OS_FOLDER_ID }}$
-            function-name: 'monitoring$FUNCTIONS_SUFFIX'
+            function-name: 'monitoring4testing'
             runtime: 'python311'
             memory: '128Mb'
             execution-timeout: '600s'
@@ -140,7 +139,7 @@ jobs:
           with:
             yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
             folder-id: ${{ secrets.YC_OS_FOLDER_ID }}
-            function-name: 'register$FUNCTIONS_SUFFIX'
+            function-name: 'register4testing'
             runtime: 'python311'
             memory: '128Mb'
             execution-timeout: '600s'
@@ -170,7 +169,7 @@ jobs:
           with:
             yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
             folder-id: ${{ secrets.YC_OS_FOLDER_ID }}
-            function-name: 'timeslots$FUNCTIONS_SUFFIX'
+            function-name: 'timeslots4testing'
             runtime: 'python311'
             memory: '128Mb'
             execution-timeout: '600s'
