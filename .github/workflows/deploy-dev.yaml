@@ -1,0 +1,206 @@
+name: Deploy everything to dev
+on: workflow_dispatch
+env:
+  FUNCTIONS_SUFFIX: 4testing
+  CONTOUR: testing
+  DB_PASS_KEY: pg-password-demo_manager_test
+  DB_PORT_KEY: pg-port
+  DB_USER_KEY: pg-user
+  DB_NAME_KEY: pg-name
+  DB_HOST_KEY: pg-host
+  K8S_HOST_KEY: k8s-host
+  K8S_SSL_KEY: k8s-certificate-authority-data
+jobs:
+    deploy:
+      name: Deploy
+      if: github.event.pull_request.merged == true
+      environment: dev
+      runs-on: trampoline
+      steps:
+        - name: Deploy DB wathcer
+          uses: yc-actions/yc-sls-function@v2
+          with:
+            yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
+            folder-id: '{{ secrets.YC_OS_FOLDER_ID }}'
+            function-name: 'k8s-db-watcher$FUNCTIONS_SUFFIX'
+            runtime: 'python311'
+            memory: '128Mb'
+            execution-timeout: '600s'
+            entrypoint: 'cloud_functions.db_watcher_function'
+            environment: | 
+              CONTOUR=$(CONTOUR)
+            secrets:
+              DB_PASS=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$DB_PASS_KEY
+              DB_PORT=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$DB_PORT_KEY
+              DB_USER=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$DB_USER_KEY
+              DB_NAME=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$DB_NAME_KEY
+              DB_HOST=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$DB_HOST_KEY
+              K8S_HOST=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$K8S_HOST_KEY
+              K8S_SSL_CERTIFICATE=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$K8S_SSL_KEY
+            service-account: {{ secrets.YC_OS_K8S_DEPLOYER_SA_ID }}
+            network-id: {{ secrets.YC_OS_NETWORK_ID }}
+            include: | 
+              requirements.txt
+              ./k8s_deployer
+              ./lib
+              cloud_functions.py
+            exclude: | 
+              **/*.pyc
+            tags: |
+              ${{ GITHUB_SHA::6 }}
+        - name: Deploy Create Function
+          uses: yc-actions/yc-sls-function@v2
+          with:
+            yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
+            folder-id: '{{ secrets.YC_OS_FOLDER_ID }}'
+            function-name: 'k8s-create$FUNCTIONS_SUFFIX'
+            runtime: 'python311'
+            memory: '128Mb'
+            execution-timeout: '600s'
+            entrypoint: 'cloud_functions.create_function'
+            environment: | 
+              CONTOUR=$(CONTOUR)
+            secrets:
+              DB_PASS=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$DB_PASS_KEY
+              DB_PORT=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$DB_PORT_KEY
+              DB_USER=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$DB_USER_KEY
+              DB_NAME=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$DB_NAME_KEY
+              DB_HOST=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$DB_HOST_KEY
+              K8S_HOST=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$K8S_HOST_KEY
+              K8S_SSL_CERTIFICATE=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$K8S_SSL_KEY
+            service-account: {{ secrets.YC_OS_K8S_DEPLOYER_SA_ID }}
+            network-id: {{ secrets.YC_OS_NETWORK_ID }}
+            include: | 
+              requirements.txt
+              ./k8s_deployer
+              ./lib
+              cloud_functions.py
+            exclude: | 
+              **/*.pyc
+            tags: |
+              ${{ GITHUB_SHA::6 }}
+        - name: Deploy Remove Function
+          uses: yc-actions/yc-sls-function@v2
+          with:
+            yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
+            folder-id: '{{ secrets.YC_OS_FOLDER_ID }}'
+            function-name: 'k8s-remove$FUNCTIONS_SUFFIX'
+            runtime: 'python311'
+            memory: '128Mb'
+            execution-timeout: '600s'
+            entrypoint: 'cloud_functions.remove_function'
+            environment: | 
+              CONTOUR=$(CONTOUR)
+            secrets:
+              DB_PASS=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$DB_PASS_KEY
+              DB_PORT=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$DB_PORT_KEY
+              DB_USER=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$DB_USER_KEY
+              DB_NAME=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$DB_NAME_KEY
+              DB_HOST=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$DB_HOST_KEY
+              K8S_HOST=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$K8S_HOST_KEY
+              K8S_SSL_CERTIFICATE=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$K8S_SSL_KEY
+            service-account: {{ secrets.YC_OS_K8S_DEPLOYER_SA_ID }}
+            network-id: {{ secrets.YC_OS_NETWORK_ID }}
+            include: | 
+              requirements.txt
+              ./k8s_deployer
+              ./lib
+              cloud_functions.py
+            exclude: | 
+              **/*.pyc
+            tags: |
+              ${{ GITHUB_SHA::6 }}
+        - name: Deploy Monitoring Function
+          uses: yc-actions/yc-sls-function@v2
+          with:
+            yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
+            folder-id: '{{ secrets.YC_OS_FOLDER_ID }}'
+            function-name: 'monitoring$FUNCTIONS_SUFFIX'
+            runtime: 'python311'
+            memory: '128Mb'
+            execution-timeout: '600s'
+            entrypoint: 'cloud_functions.send_monitoring_metrics'
+            environment: | 
+              CONTOUR=$(CONTOUR)
+            secrets:
+              DB_PASS=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$DB_PASS_KEY
+              DB_PORT=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$DB_PORT_KEY
+              DB_USER=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$DB_USER_KEY
+              DB_NAME=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$DB_NAME_KEY
+              DB_HOST=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$DB_HOST_KEY
+              K8S_HOST=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$K8S_HOST_KEY
+              K8S_SSL_CERTIFICATE=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$K8S_SSL_KEY
+            service-account: {{ secrets.YC_OS_MONITORING_SA_ID }}
+            network-id: {{ secrets.YC_OS_NETWORK_ID }}
+            include: | 
+              requirements.txt
+              ./k8s_deployer
+              ./lib
+              cloud_functions.py
+            exclude: | 
+              **/*.pyc
+            tags: |
+              ${{ GITHUB_SHA::6 }}
+        - name: Deploy Registration Function
+          uses: yc-actions/yc-sls-function@v2
+          with:
+            yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
+            folder-id: '{{ secrets.YC_OS_FOLDER_ID }}'
+            function-name: 'register$FUNCTIONS_SUFFIX'
+            runtime: 'python311'
+            memory: '128Mb'
+            execution-timeout: '600s'
+            entrypoint: 'cloud_functions.register'
+            environment: | 
+              CONTOUR=$(CONTOUR)
+            secrets:
+              DB_PASS=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$DB_PASS_KEY
+              DB_PORT=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$DB_PORT_KEY
+              DB_USER=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$DB_USER_KEY
+              DB_NAME=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$DB_NAME_KEY
+              DB_HOST=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$DB_HOST_KEY
+              K8S_HOST=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$K8S_HOST_KEY
+              K8S_SSL_CERTIFICATE=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$K8S_SSL_KEY
+            service-account: {{ secrets.YC_OS_REGISTRATION_SA_ID }}
+            network-id: {{ secrets.YC_OS_NETWORK_ID }}
+            include: | 
+              requirements.txt
+              ./registration_backend
+              ./lib
+              cloud_functions.py
+            exclude: | 
+              **/*.pyc
+            tags: |
+              ${{ GITHUB_SHA::6 }}
+        - name: Deploy Timeslots Function
+          uses: yc-actions/yc-sls-function@v2
+          with:
+            yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
+            folder-id: '{{ secrets.YC_OS_FOLDER_ID }}'
+            function-name: 'timeslots$FUNCTIONS_SUFFIX'
+            runtime: 'python311'
+            memory: '128Mb'
+            execution-timeout: '600s'
+            entrypoint: 'cloud_functions.timeslots'
+            environment: | 
+              CONTOUR=$(CONTOUR)
+            secrets:
+              DB_PASS=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$DB_PASS_KEY
+              DB_PORT=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$DB_PORT_KEY
+              DB_USER=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$DB_USER_KEY
+              DB_NAME=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$DB_NAME_KEY
+              DB_HOST=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$DB_HOST_KEY
+              K8S_HOST=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$K8S_HOST_KEY
+              K8S_SSL_CERTIFICATE=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$K8S_SSL_KEY
+            service-account: {{ secrets.YC_OS_REGISTRATION_SA_ID }}
+            network-id: {{ secrets.YC_OS_NETWORK_ID }}
+            include: | 
+              requirements.txt
+              ./registration_backend
+              ./lib
+              cloud_functions.py
+            exclude: | 
+              **/*.pyc
+            tags: |
+              ${{ GITHUB_SHA::6 }}
+
