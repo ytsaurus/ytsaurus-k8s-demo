@@ -1,14 +1,5 @@
 name: Deploy everything to dev
 on: workflow_dispatch
-env:
-  CONTOUR: testing
-  DB_PASS_KEY: pg-password-demo_manager_test
-  DB_PORT_KEY: pg-port
-  DB_USER_KEY: pg-user
-  DB_NAME_KEY: pg-name
-  DB_HOST_KEY: pg-host
-  K8S_HOST_KEY: k8s-host
-  K8S_SSL_KEY: k8s-certificate-authority-data
 jobs:
     deploy:
       name: Deploy
@@ -26,15 +17,15 @@ jobs:
             execution-timeout: '600s'
             entrypoint: 'cloud_functions.db_watcher_function'
             environment: | 
-              CONTOUR=$(CONTOUR)
+              CONTOUR=${{ vars.CONTOUR }}
             secrets:
-              DB_PASS=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$DB_PASS_KEY
-              DB_PORT=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$DB_PORT_KEY
-              DB_USER=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$DB_USER_KEY
-              DB_NAME=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$DB_NAME_KEY
-              DB_HOST=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$DB_HOST_KEY
-              K8S_HOST=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$K8S_HOST_KEY
-              K8S_SSL_CERTIFICATE=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$K8S_SSL_KEY
+              DB_PASS=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/${{ vars.DB_PASS_KEY }}
+              DB_PORT=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/${{ vars.DB_PORT_KEY }}
+              DB_USER=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/${{ vars.DB_USER_KEY }}
+              DB_NAME=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/${{ vars.DB_NAME_KEY }}
+              DB_HOST=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/${{ vars.DB_HOST_KEY }}
+              K8S_HOST=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/${{ vars.K8S_HOST_KEY }}
+              K8S_SSL_CERTIFICATE=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/${{ vars.K8S_SSL_KEY }}
             service-account: ${{ secrets.YC_OS_K8S_DEPLOYER_SA_ID }}
             network-id: ${{ secrets.YC_OS_NETWORK_ID }}
             include: | 
@@ -55,15 +46,15 @@ jobs:
             execution-timeout: '600s'
             entrypoint: 'cloud_functions.create_function'
             environment: | 
-              CONTOUR=$(CONTOUR)
+              CONTOUR=${{ vars.CONTOUR }}
             secrets:
-              DB_PASS=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$DB_PASS_KEY
-              DB_PORT=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$DB_PORT_KEY
-              DB_USER=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$DB_USER_KEY
-              DB_NAME=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$DB_NAME_KEY
-              DB_HOST=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$DB_HOST_KEY
-              K8S_HOST=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$K8S_HOST_KEY
-              K8S_SSL_CERTIFICATE=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$K8S_SSL_KEY
+              DB_PASS=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/${{ vars.DB_PASS_KEY }}
+              DB_PORT=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/${{ vars.DB_PORT_KEY }}
+              DB_USER=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/${{ vars.DB_USER_KEY }}
+              DB_NAME=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/${{ vars.DB_NAME_KEY }}
+              DB_HOST=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/${{ vars.DB_HOST_KEY }}
+              K8S_HOST=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/${{ vars.K8S_HOST_KEY }}
+              K8S_SSL_CERTIFICATE=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/${{ vars.K8S_SSL_KEY }}
             service-account: ${{ secrets.YC_OS_K8S_DEPLOYER_SA_ID }}
             network-id: ${{ secrets.YC_OS_NETWORK_ID }}
             include: | 
@@ -85,15 +76,15 @@ jobs:
             execution-timeout: '600s'
             entrypoint: 'cloud_functions.remove_function'
             environment: | 
-              CONTOUR=$(CONTOUR)
+              CONTOUR=${{ vars.CONTOUR }}
             secrets:
-              DB_PASS=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$DB_PASS_KEY
-              DB_PORT=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$DB_PORT_KEY
-              DB_USER=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$DB_USER_KEY
-              DB_NAME=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$DB_NAME_KEY
-              DB_HOST=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$DB_HOST_KEY
-              K8S_HOST=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$K8S_HOST_KEY
-              K8S_SSL_CERTIFICATE=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$K8S_SSL_KEY
+              DB_PASS=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/${{ vars.DB_PASS_KEY }}
+              DB_PORT=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/${{ vars.DB_PORT_KEY }}
+              DB_USER=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/${{ vars.DB_USER_KEY }}
+              DB_NAME=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/${{ vars.DB_NAME_KEY }}
+              DB_HOST=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/${{ vars.DB_HOST_KEY }}
+              K8S_HOST=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/${{ vars.K8S_HOST_KEY }}
+              K8S_SSL_CERTIFICATE=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/${{ vars.K8S_SSL_KEY }}
             service-account: ${{ secrets.YC_OS_K8S_DEPLOYER_SA_ID }}
             network-id: ${{ secrets.YC_OS_NETWORK_ID }}
             include: | 
@@ -115,15 +106,15 @@ jobs:
             execution-timeout: '600s'
             entrypoint: 'cloud_functions.send_monitoring_metrics'
             environment: | 
-              CONTOUR=$(CONTOUR)
+              CONTOUR=${{ vars.CONTOUR }}
             secrets:
-              DB_PASS=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$DB_PASS_KEY
-              DB_PORT=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$DB_PORT_KEY
-              DB_USER=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$DB_USER_KEY
-              DB_NAME=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$DB_NAME_KEY
-              DB_HOST=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$DB_HOST_KEY
-              K8S_HOST=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$K8S_HOST_KEY
-              K8S_SSL_CERTIFICATE=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$K8S_SSL_KEY
+              DB_PASS=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/${{ vars.DB_PASS_KEY }}
+              DB_PORT=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/${{ vars.DB_PORT_KEY }}
+              DB_USER=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/${{ vars.DB_USER_KEY }}
+              DB_NAME=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/${{ vars.DB_NAME_KEY }}
+              DB_HOST=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/${{ vars.DB_HOST_KEY }}
+              K8S_HOST=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/${{ vars.K8S_HOST_KEY }}
+              K8S_SSL_CERTIFICATE=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/${{ vars.K8S_SSL_KEY }}
             service-account: ${{ secrets.YC_OS_MONITORING_SA_ID }}
             network-id: ${{ secrets.YC_OS_NETWORK_ID }}
             include: | 
@@ -145,15 +136,15 @@ jobs:
             execution-timeout: '600s'
             entrypoint: 'cloud_functions.register'
             environment: | 
-              CONTOUR=$(CONTOUR)
+              CONTOUR=${{ vars.CONTOUR }}
             secrets:
-              DB_PASS=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$DB_PASS_KEY
-              DB_PORT=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$DB_PORT_KEY
-              DB_USER=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$DB_USER_KEY
-              DB_NAME=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$DB_NAME_KEY
-              DB_HOST=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$DB_HOST_KEY
-              K8S_HOST=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$K8S_HOST_KEY
-              K8S_SSL_CERTIFICATE=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$K8S_SSL_KEY
+              DB_PASS=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/${{ vars.DB_PASS_KEY }}
+              DB_PORT=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/${{ vars.DB_PORT_KEY }}
+              DB_USER=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/${{ vars.DB_USER_KEY }}
+              DB_NAME=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/${{ vars.DB_NAME_KEY }}
+              DB_HOST=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/${{ vars.DB_HOST_KEY }}
+              K8S_HOST=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/${{ vars.K8S_HOST_KEY }}
+              K8S_SSL_CERTIFICATE=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/${{ vars.K8S_SSL_KEY }}
             service-account: ${{ secrets.YC_OS_REGISTRATION_SA_ID }}
             network-id: ${{ secrets.YC_OS_NETWORK_ID }}
             include: | 
@@ -175,15 +166,15 @@ jobs:
             execution-timeout: '600s'
             entrypoint: 'cloud_functions.timeslots'
             environment: | 
-              CONTOUR=$(CONTOUR)
+              CONTOUR=${{ vars.CONTOUR }}
             secrets:
-              DB_PASS=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$DB_PASS_KEY
-              DB_PORT=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$DB_PORT_KEY
-              DB_USER=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$DB_USER_KEY
-              DB_NAME=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$DB_NAME_KEY
-              DB_HOST=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$DB_HOST_KEY
-              K8S_HOST=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$K8S_HOST_KEY
-              K8S_SSL_CERTIFICATE=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/$K8S_SSL_KEY
+              DB_PASS=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/${{ vars.DB_PASS_KEY }}
+              DB_PORT=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/${{ vars.DB_PORT_KEY }}
+              DB_USER=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/${{ vars.DB_USER_KEY }}
+              DB_NAME=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/${{ vars.DB_NAME_KEY }}
+              DB_HOST=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/${{ vars.DB_HOST_KEY }}
+              K8S_HOST=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/${{ vars.K8S_HOST_KEY }}
+              K8S_SSL_CERTIFICATE=${{ secrets.YC_OS_SECRET_ID }}/${{ secrets.YC_OS_SECRET_VERSION }}/${{ vars.K8S_SSL_KEY }}
             service-account: ${{ secrets.YC_OS_REGISTRATION_SA_ID }}
             network-id: ${{ secrets.YC_OS_NETWORK_ID }}
             include: | 
