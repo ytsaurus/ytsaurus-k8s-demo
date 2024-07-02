@@ -1,16 +1,26 @@
-apiVersion: gateway.networking.k8s.io/v1alpha2
-kind: HTTPRoute
+apiVersion: networking.k8s.io/v1
+kind: Ingress
 metadata:
-  name: grafana
+  name: "{{ namespace }}-ingress-alb-grafana"
+  annotations:
+    ingress.alb.yc.io/group-name: demo-ingress-group
+    ingress.alb.yc.io/subnets: e2l7uemo3e2t69gmj2d3
+    ingress.alb.yc.io/security-groups: enp943bhggcf47u0i55g
+    ingress.alb.yc.io/external-ipv4-address: auto
 spec:
-  parentRefs:
-    - name: yt-demo
-      namespace: default
-      sectionName: ytsaurus
-  hostnames:
-    - "grafana-{{ namespace }}.demo.ytsaurus.tech"
+  tls:
+    - hosts:
+        - "grafana-{{ namespace }}.demo.ytsaurus.tech"
+      secretName: yc-certmgr-cert-id-fpqjrj541bbb6459qhtc
   rules:
-    - backendRefs:
-        - name: grafana
-          port: 3000
+    - host: "grafana-{{ namespace }}.demo.ytsaurus.tech"
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: grafana
+                port:
+                  number: 3000
 

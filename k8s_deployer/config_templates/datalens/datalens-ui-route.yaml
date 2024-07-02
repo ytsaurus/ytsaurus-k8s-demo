@@ -1,15 +1,25 @@
-apiVersion: gateway.networking.k8s.io/v1alpha2
-kind: HTTPRoute
+apiVersion: networking.k8s.io/v1
+kind: Ingress
 metadata:
-  name: datalens
+  name: "{{ namespace }}-ingress-alb-datalens"
+  annotations:
+    ingress.alb.yc.io/group-name: demo-ingress-group
+    ingress.alb.yc.io/subnets: e2l7uemo3e2t69gmj2d3
+    ingress.alb.yc.io/security-groups: enp943bhggcf47u0i55g
+    ingress.alb.yc.io/external-ipv4-address: auto
 spec:
-  parentRefs:
-    - name: yt-demo
-      namespace: default
-      sectionName: ytsaurus
-  hostnames:
-    - "datalens-{{namespace}}.demo.ytsaurus.tech"
+  tls:
+    - hosts:
+        - "datalens-{{namespace}}.demo.ytsaurus.tech"
+      secretName: yc-certmgr-cert-id-fpqjrj541bbb6459qhtc
   rules:
-    - backendRefs:
-        - name: datalens-ui-lb
-          port: 80
+    - host: "datalens-{{namespace}}.demo.ytsaurus.tech"
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: datalens-ui-lb
+                port:
+                  number: 80
